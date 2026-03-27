@@ -179,6 +179,7 @@ This document lists all claims that require independent verification before this
 | ✅ DONE | Full Boltzmann relic + convention correction | `test_alpha_convention.py` | Resolved — α_CSV = α_Yukawa; (8/9) was wrong; 17/17 pass |
 | ✅ DONE | A₄ CG cross-check | `verify_a4_cg.py` | Resolved — tan²θ=1/9 confirmed |
 | ✅ DONE | σ trapping during freeze-out | `sigma_trapping_ode.py` | Resolved — θ is discrete, not dynamical |
+| ✅ DONE | **PI-2: θ_A₄ instanton stability** | `SIDM-LAGANJIAN_INTEGRAL/test_PI2_instanton_stability.py` | Resolved — $S_E\sim10^{121}$, bubble wall = Hubble radius; ABSOLUTELY STABLE |
 | � MED | CW potential scale | `dark-energy-T-breaking/` | Dark QCD bypasses CW hierarchy; new checks needed for confinement sector |
 | 🟡 MEDIUM | σ/m threshold literature | Literature review | No |
 | ✅ DONE | VEV alignment stability | `vev_alignment_stability.py` | Resolved — (1,1,1)×(1,0,0) stable with κ₁-only cross-coupling |

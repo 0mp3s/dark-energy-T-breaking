@@ -171,6 +171,22 @@ $$\Gamma_{tunnel} \sim \exp\left(-S_E^{instanton}\right), \quad S_E \sim \frac{\
 **למה זה חשוב**: אם $\Gamma_{tunnel} \ll H_0^4$ — θ יציב לגיל היקום ✅.  
 אם $\Gamma_{tunnel} \gg H_0^4$ — A₄ לא מחזיק את הזווית על פני 14 מיליארד שנה ❌.
 
+**תוצאות (committed `8873be1`)**:
+
+| שיטה | $\log_{10}(S_E)$ | יציב? |
+|------|----------------|-------|
+| Dimensional estimate | 120.9 | ✅ כן |
+| Thin-wall (analytic) | 121.5 | ✅ כן |
+| Thin-wall (numeric) | 121.5 | ✅ כן |
+
+- $S_E \sim (f/m_\sigma)^2 \sim (2\times10^{60})^2 \sim 10^{121}$
+- $S_{E,crit} \approx 0$ (סף יציבות = כמעט כלום)
+- $\log_{10}(N_{bubbles}) \approx -1.4\times10^{121}$ — **אפס מוחלט** של אירועי tunneling
+
+**מסקנה פיזיקלית**: דופן הבועה חייבת לפרוש את $r_0 \sim 1/m_\sigma \sim H_0^{-1}$ — **רדיוס הוביל**. אינסטנטון שכזה אסור קוסמולוגית, לא מדוכא אנרגטית. $\theta_{A_4} = \arcsin(1/3)$ קפוא לכל גיל היקום.
+
+**✅ PI-2 PASS — ABSOLUTELY STABLE**
+
 ---
 
 ### Test PI-3: Stochastic Path Integral — P(θ_i) מהינפלציה
@@ -252,14 +268,14 @@ $$\ln\det = \text{Tr}\ln = \sum_\ell (2\ell+1) \ln e^{2i\delta_\ell} = 2i\sum_\e
 | Test | שאלה | מה הנגזרת נתנה | מה האינטגרל מוסיף |
 |------|------|----------------|-------------------|
 | PI-1 | האם θ נלכד בַּ-freeze-out? | Test 4: "לא, CW מנצח" (ODE) | V_eff(T) — תרמל exact תוך זרימה |
-| PI-2 | האם θ_A₄ יציב קוונטית? | לא נבדק | אינסטנטון: $\Gamma_{tunnel}$ vs $H_0^4$ |
+| PI-2 | האם θ_A₄ יציב קוונטית? | ✅ נבדק — PASS | $S_E\sim10^{121}$, bubble wall = Hubble radius → **ABSOLUTELY STABLE** |
 | PI-3 | מאיפה θ_i ~ 2 rad? | לא נבדק | P(θ_i) מ-stochastic inflation |
 | PI-4 | האם α ב-UV תקין? | לא נבדק | RG flow עד $M_{Pl}$ |
 | PI-5 | האם screening ב-גלקסיה מדויק? | Test 3: הערכה | V_eff(n_χ): exact chameleon |
 | PI-6 | האם VPM exact? | Test 15: σ_p זניח | ✅ VPM = fluctuation determinant |
 
 **סדר עדיפות מוצע**:
-1. **PI-2 (אינסטנטון)** — 🔴 **BLOCKING** — שאלת יציבות קריטית לנרטיב המאמר. אם $\Gamma_{tunnel} > H_0^4$ — הטענה המרכזית קורסת.
-2. **PI-1 (V_eff תרמי)** — מחליף Test 4 בדרך מדויקת
-3. **PI-3 (הסתברות ינפלציה)** — מסביר θ_i בלי לתרץ
+1. ~~**PI-2 (אינסטנטון)**~~ — ✅ **DONE** — $S_E\sim10^{121}$, θ_A₄ יציב לחלוטין. `8873be1`
+2. **PI-3 (הסתברות ינפלציה)** — 🔴 **NEXT** — מסביר θ_i ~ 2 rad בלי לתרץ. אם $P(\theta_i\sim2)=O(1)$, H₀=67.4 הוא דרישה סטטיסטית.
+3. **PI-1 (V_eff תרמי)** — מחליף Test 4 בדרך מדויקת
 4. **PI-5 (in-medium)** — מאמת Test 3 כמותית

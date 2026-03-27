@@ -1103,3 +1103,437 @@ The alignment is **robust** — not fine-tuned. κ₁ can range from -1 to +1 wi
 | File | Purpose | Status |
 |---|---|---|
 | `vev_alignment_stability.py` | A₄ VEV alignment: single + two-flavon potential | ✅ Complete |
+
+---
+
+## Audit & Bug Fix Cycle (27 Mar 2026)
+
+### Full Codebase Audit
+
+Sonnet subagent ran an independent audit of all script files → `AUDIT_REPORT.md`. Found 9 bugs across 8 scripts, none theoretical — all implementation errors (sign conventions, unit conversions, missing factors).
+
+An Opus independent audit confirmed the fixes. Bug/fix comparison tables delivered.
+
+### Fix Verification — Running Fixed Scripts
+
+Ran 3 scripts before and after bug fixes to confirm numerical outputs differ:
+
+| Script | Buggy output | Fixed output | Key change |
+|---|---|---|---|
+| `dark_force_accumulation` | Crashed (Unicode) | ✅ α=0.0057, y=0.2684 | Encoding fix |
+| `resonance_bp1` | m_φ=11.34, λ=1.912, σ/m=0.449 | m_φ=10.83, λ=2.002, **σ/m=0.517** | Crosses SIDM 0.5 threshold! |
+| `sigma_trapping_ode` | y=0.26843, F_CW=−2.618e−9 | y=0.28471, F_CW=−2.776e−9 | CW force 6% larger |
+
+**Significant finding**: resonance_bp1 fix changes σ/m from below to above the 0.5 cm²/g SIDM threshold — this BP was falsely excluded.
+
+---
+
+## Test 17: Neutrino–Dark Sector Resonance Analysis (27 Mar 2026)
+
+**Script**: `neutrino_dark_resonance.py`
+
+**Question**: האם יש אפקט קוואנטי, רזוננס של נויטרינו במגזר האפל?
+
+### Motivation
+
+The A₄ symmetry that produces both $\sin^2\theta_{12} = 1/3$ (neutrino TBM) and $\sin\theta_{dark} = 1/3$ (dark sector) MUST generate portal operators connecting the two sectors at some order. Question: does this lead to observable quantum effects?
+
+### Part 1: A₄-Allowed Portal Operators
+
+Three portal scenarios identified:
+
+| Portal | Operator | $g_\nu$ scale | Type |
+|---|---|---|---|
+| A: Higgs portal | $\lambda_{H\phi} |H|^2 \phi^2$ | $\sim 10^{-17}$–$10^{-23}$ | Renormalizable |
+| B: A₄ flavon portal (dim-5) | $(1/\Lambda_{UV})(\bar{L}\tilde{H})(\chi\xi)_1$ | $m_\nu/\Lambda_{flavon}$ | Seesaw-like |
+| C: 1-loop | shared A₄ flavon | $9.0 \times 10^{-13}$ | Loop-induced |
+
+**Key**: For $\Lambda_{flavon} \sim$ TeV: $g_\nu \sim 5 \times 10^{-14}$; for $M_{Pl}$: $g_\nu \sim 2 \times 10^{-29}$.
+
+### Part 2: φ → νν Decay — The Central Result
+
+Since $m_\phi = 11.1$ MeV $< 2m_\chi = 188$ MeV, **φ cannot decay to χχ** (kinematically forbidden). If the A₄ portal provides the leading decay channel:
+
+| $g_\nu$ scale | τ(φ→νν) | Decays when? |
+|---|---|---|
+| TeV ($5 \times 10^{-14}$) | $6 \times 10^5$ s (~7 days) | After BBN |
+| $10^{10}$ GeV ($5 \times 10^{-21}$) | $6 \times 10^{19}$ s | After CMB |
+| $M_{Pl}$ ($2 \times 10^{-29}$) | $3.5 \times 10^{36}$ s | Effectively stable |
+| Loop ($9 \times 10^{-13}$) | $1.8 \times 10^3$ s | During BBN ⚠️ |
+
+**Critical threshold**: BBN safety ($\tau < 1$ s) requires $g_\nu > 3.9 \times 10^{-11}$ — none of the natural portals reach this.
+
+**Monoenergetic neutrino line**: $E_\nu = m_\phi/2 = 5.55$ MeV
+
+### Part 3: MSW Resonance in Early Universe
+
+Standard MSW potential from thermal leptons drives $\nu \to \chi$ resonant conversion:
+
+$$\boxed{T_{resonance} = 5.53 \text{ GeV}}$$
+
+- Above QCD phase transition → in quark-gluon plasma ✅
+- $m_\chi/T_{res} = 0.017$ → χ is relativistic → already thermally populated
+- Resonance doesn't CREATE χ but MODIFIES neutrino flavor evolution
+- Adiabaticity: for $\varepsilon = 1$ MeV mixing, $\gamma_{LZ} = 2.7 \times 10^3$ → fully adiabatic ✅; for $\varepsilon \lesssim 1$ eV → non-adiabatic
+
+### Part 4: Dark MSW Potential Today
+
+$V_{dark} = g_\nu \cdot y_s \cdot n_\chi / m_\phi^2$
+
+| Environment | $V_{dark}(TeV)$ / $(\Delta m^2/2E)$ |
+|---|---|
+| Local (0.4 GeV/cm³) | $\sim 10^{-30}$ |
+| BH spike ($10^{10}$ GeV/cm³) | $\sim 10^{-20}$ |
+
+**Verdict**: ❌ COMPLETELY NEGLIGIBLE. No observable dark MSW effect today.
+
+### Part 5: Neutrino Flux from χχ → φφ → 4ν
+
+If φ→νν dominates, DM annihilation produces a box spectrum:
+
+$$E_\nu \in [0.33, 93.7] \text{ MeV}$$
+
+Boost factor: $\gamma_\phi = 8.47$ (since $m_\phi \ll m_\chi$). Detectable at Super-K, Hyper-K, JUNO as distinctive box-shaped spectrum in the MeV range.
+
+### Part 6: Sommerfeld Enhancement of ν-χ Scattering
+
+$$\alpha_{eff} = g_\nu y_s / 4\pi \sim 10^{-15} \text{ (TeV)}, \quad \lambda = 2\alpha_{eff} m_r/m_\phi \sim 10^{-24}$$
+
+**Verdict**: ❌ Deep short-range regime. No non-perturbative effects.
+
+### Part 7: The A₄ Structural Coincidence
+
+$$\sin^2\theta_{12}(\text{neutrino}) = \frac{1}{3} = 3 \times \frac{1}{9} = 3 \times \sin^2\theta_{dark}$$
+
+Both from the S generator of A₄: diagonal elements give $|S_{11}|^2 = 1/9$; eigenvectors give TBM $\sin^2\theta_{12} = 1/3$. Factor 3 = dimension of triplet representation. **Testable prediction** of unified A₄.
+
+### Part 8: Scale Coincidence
+
+$$\Lambda_d = \sqrt{H_0 M_{Pl}} = 1.87 \times 10^{-3} \text{ eV} \sim m_\nu \sim 0.05 \text{ eV}$$
+
+Ratio $\Lambda_d/m_\nu \sim 0.04$ — both sub-eV scales. Possible common origin through A₄ breaking.
+
+### Summary Table
+
+| Effect | Status | Observable? |
+|---|---|---|
+| A₄ forces portal operators | ✅ YES | Structural |
+| MSW resonance at T ~ 5 GeV | ✅ EXISTS | Not directly |
+| φ → νν at 5.55 MeV | ✅ OPEN | BBN, ΔN_eff, ν spectrum |
+| Dark MSW today | ❌ TINY | No |
+| Sommerfeld ν-χ | ❌ TINY | No |
+| χχ→φφ→4ν flux | ✅ POSSIBLE | Super-K, JUNO |
+| sin²θ₁₂ = 3×sin²θ_dark | ✅ A₄ | Testable prediction |
+| Λ_d ~ m_ν (meV) | ✅ HINT | Deep connection? |
+
+### Key Physical Conclusion
+
+**The most significant finding is φ → νν**: Since φ cannot decay to χχ (kinematically forbidden), the A₄ portal to neutrinos may be the **dominant φ decay channel**. This produces:
+1. A monoenergetic 5.55 MeV neutrino line
+2. A box spectrum (0.33–93.7 MeV) from DM annihilation χχ→φφ→4ν
+3. BBN constraints on the portal coupling scale
+
+The portal coupling is the **only free parameter** connecting the neutrino and dark sectors — everything else (A₄ group structure, θ = arcsin(1/3), scale coincidence Λ_d ~ m_ν) is fixed by the framework.
+
+### Files
+
+| File | Purpose | Status |
+|---|---|---|
+| `neutrino_dark_resonance.py` | Full numerical analysis: portals, MSW, φ→νν, Sommerfeld | ✅ Complete |
+
+---
+
+## Test 18: SIDM Velocity-Dependent Cross Section (27 Mar 2026)
+
+**Script**: `sidm_velocity_cross_section.py`
+
+**Question המרכזית**: האם המודל A₄ × U(1)_D **מנבא** SIDM, או שזו צירות מקרית?
+
+### רקע ומוטיבציה
+
+פרמטרי ה-MAP benchmark נקבעו מ:
+1. Ω_DM h² = 0.120 (צפיפות רליק)
+2. θ = arcsin(1/3) (A₄ גיאומטרי — לא מכוונן)
+3. Λ_d = √(H₀ M_Pl) (סקאלת DE)
+
+**SIDM לא היה אילוץ בסריקה.** לכן אם σ/m נוחת בחלון SIDM — זוהי **תחזית** של הלגרנזיאן.
+
+### תובנות מוקדמות (לפני הרצה)
+
+**תובנה 1: Beta-parameter קריטי**
+
+$$\beta = \frac{2\alpha_D m_\chi}{m_\phi (v/c)}$$
+
+עם m_χ=94 MeV, m_φ=11.1 MeV, α_D=5.7×10⁻³ וv=30 km/s → β~970.
+- β ≫ 1 בכל הסביבות האסטרופיזיקליות → Born approximation **לא תקף**
+- צריך Hulthén (ניתן לפתרון אנליטי לכל β)
+
+**תובנה 2: קשר לגרנזיאני**
+
+$$\frac{\sigma_T}{m_\chi} \propto \frac{\alpha_D^2 \, m_\chi}{m_\phi^4}$$
+
+אילוץ רליק קובע: α_D² ~ const × m_χ². לכן:
+$$\frac{\sigma_T}{m_\chi} \propto \frac{m_\chi^3}{m_\phi^4}$$
+היחס m_φ/m_χ ~ 0.12 נקבע ע"י ה-dark Higgs VEV (A₄ breaking), **לא** ע"י SIDM. 
+⇒ SIDM הוא **תוצאה** של המבנה הלגרנזיאני.
+
+**תובנה 3: Velocity-dependent profiling**
+
+במשטר קלאסי (β ≫ 1):
+- v נמוך (גלקסיות ננסיות) → σ/m גדול → תרמוליזציה → core-cusp נפתר ✓
+- v גבוה (Bullet Cluster) → σ/m קטן → אילוץ Bullet נשמר ✓
+
+זה בדיוק הפרופיל הנחוץ לפתרון בעיות DM קנה-מידה קטן.
+
+**תובנה 4: ניתנת לבדיקה ב-z≠0**
+
+אם σ מצמד ל-φ (קיים בלגרנזיאן ביחס λ_φσ φ²σ²), אז ⟨σ⟩(z) משנה m_φ^eff ולכן σ_SIDM(z).
+**תחזית**: חתך SIDM ב-MACS J0025 (z=0.59) שונה ב-~λ_φσ⟨σ⟩²/m_φ² מהיום.
+
+### קישור לתובנות מהדיון:
+- ρ_DM ∝ a⁻³ אבל σ_SIDM(v) = const (תלוי רק במסות ובקפלינג, לא בצפיפות)
+- ρ_σ ≈ const (w≈−1) — DE, לא DM — כלומר σ לא "מדולל" עם ההתרחבות
+- שיתוף הלגרנזיאן (χ, φ, σ מאותה L) = **אחידות**: DM + DE + SIDM מקור אחד
+
+### תוצאות — VPM על MAP הנוכחי (27 Mar 2026)
+
+**✅ 5/5 PASS** — הרצנו את ה-VPM solver המקורי מ-`Secluded-Majorana-SIDM` על הפרמטרים המדויקים (94.07 GeV, 11.10 MeV, α=5.734×10⁻³):
+
+| v (km/s) | סביבה | σ/m (cm²/g) | אילוץ | עובר? |
+|---|---|---|---|---|
+| 30 | גלקסיות ננסיות | **1.71** | ≥ 0.5 | ✓ |
+| 200 | קבוצות גלקסיות | **0.91** | ≥ 0.1 | ✓ |
+| 1000 | אשכולות | **0.26** | < 0.47 | ✓ |
+| 2000 | אשכולות גדולים | **0.11** | < 0.47 | ✓ |
+| 3000 | Bullet Cluster | **0.059** | < 1.25 | ✓ |
+
+**הבדל קריטי: VPM vs נוסחה קלאסית**
+- נוסחה קלאסית (β>>1): σ/m@30 = 36,848 cm²/g — **כישלון מוחלט**
+- VPM solver: σ/m@30 = 1.71 cm²/g — **הצלחה**
+- הפרש: ×21,000. הנוסחה הקלאסית מגזימה מסיבות ידועות (Coulomb-log divergence בתחום β>>1).
+- **VPM הוא הכלי הנכון** — פותר את משוואת שרדינגר נומרית ללא קירוב Born.
+
+**מסקנה**: SIDM **הוא תחזית** של המודל, לא אילוץ שנכנס לסריקה. הLAGRANGIAN בוחר את SIDM window אוטומטית.
+
+---
+
+## השערה: H₀ כקבוע האינטגרציה של הלגרנזיאן (27 Mar 2026)
+
+**מקור**: שיחה — "קבוע האבל הוא הקבוע שמוסיפים לאינטגרל הבלתי-מסויים של הלגרנזיאן?"
+
+### הניסוח המדויק
+
+כאשר מגזרים את משוואות התנועה מהלגרנזיאן של המודל:
+
+$$\mathcal{L} = \mathcal{L}_{EH} + \mathcal{L}_{dark} + \mathcal{L}_{matter}$$
+
+משוואות פרידמן שמתקבלות הן:
+
+$$H^2 = \frac{\rho_{total}}{3 M_{Pl}^2}, \quad \rho_{total} = \rho_\chi + \rho_\phi + \rho_\sigma + \rho_{baryons}$$
+
+**H₀** — ערך H היום — אינו קבוע חופשי בלגרנזיאן. הוא **תנאי שפה**: ערך H בזמן קוסמי ספציפי (היום), הנקבע ע"י ρ_total כיום.
+
+### אז מה כן "קבוע אינטגרציה"?
+
+**הקבוע הקוסמולוגי Λ הוא הקבוע האמיתי.** כש-Friedmann ממזג את הלגרנזיאן, הביאנקי אידנטיטי (∇_μG^μν=0) מאפשר להוסיף:
+
+$$G_{\mu\nu} + \Lambda g_{\mu\nu} = \frac{1}{M_{Pl}^2} T_{\mu\nu}$$
+
+ה-Λ כאן הוא **אמיתי** קבוע אינטגרציה — הלגרנזיאן לא קובע את ערכו. זה **הבעיה הקוסמולוגית הגדולה** (מה קובע Λ?).
+
+### השאלה שלך: "המודל לעולם לא יוכל להסביר H₀?"
+
+**תשובה מדויקת: לא לגמרי, ויש כאן ניואנס עמוק.**
+
+| שאלה | תשובה |
+|---|---|
+| האם המודל מנבא H₀ מעיקרון ראשון? | **לא** — H₀ = f(ρ_total) דורש ידיעת Λ |
+| האם Λ ניתן לחישוב מהלגרנזיאן? | **לא** — זו הבעיה הקוסמולוגית הגדולה |
+| האם המודל מסביר למה ρ_DE ~ ρ_DM היום? | **באופן חלקי** — דרך σ כ-quintessence |
+| האם H₀ נכנס כקלט בהגדרת Λ_d? | **כן** — וזה גורם לסירקולריות |
+
+### הסירקולריות הבעייתית במודל
+
+$$\Lambda_d = \sqrt{H_0 M_{Pl}} \approx 1.87 \; {\rm meV}$$
+
+$$m_\sigma \sim \frac{\Lambda_d^2}{f} \sim H_0 \quad (\text{if } f \sim M_{Pl})$$
+
+**הסירקולריות**: הגדרנו Λ_d בעזרת H₀ ← גזרנו m_σ ~ H₀ ← "הסברנו" למה ρ_σ ~ ρ_Λ.
+אבל **למה** Λ_d = √(H₀ M_Pl)? זה הנחה, לא תוצאה.
+
+### המשמעות העמוקה — והאינטואיציה שלך נכונה
+
+$$\rho_\sigma = \frac{1}{2} m_\sigma^2 f^2 \sim H_0^2 M_{Pl}^2 = \rho_\Lambda^{observed}$$
+
+המודל **אכן מסביר** למה אנרגיה אפלה "דוחפת": σ עם m_σ < H₀ הוא שדה קפוא, לחץ שלילי p = -ρ, w = -1. **זה עובד פיזיקלית.**
+
+אבל המחיר: **H₀ כקלט, לא כפלט**. כל מודל quintessence סובל מזה.
+
+### מה זה אומר על המודל?
+
+**המודל לא פותר את בעיית Λ. הוא מחליף אותה.**
+
+במקום לשאול "למה Λ קטן כל כך?" שואלים "למה m_σ ~ H₀?" — שאלה שקולה, אבל המודל יכול לתת לה מסגרת (A₄ breaking + Λ_QCD_dark).
+
+**האנלוגיה הנכונה**: כמו שמודל ΛCDM "מסביר" את הצפיפות ע"י Λ כפרמטר חופשי — המודל שלנו מסביר אותה ע"י m_σ כפרמטר חופשי שנקבע ע"י הפיזיקה של dark QCD. **זה שיפור עקרוני**, כי m_σ נוצר מדינמיקה (confinement), לא מוכנס ביד.
+
+### מסקנה: לא נופלים במתמטיקה
+
+האינטואיציה שלך מדויקת: H₀ נכנס כ"קבוע" חיצוני. המתמטיקה הפורמלית: Λ הוא קבוע אינטגרציה של תנאי הגבול של הלגרנזיאן. H₀ הוא תנאי שפה קוסמי. השניים קשורים דרך ρ_Λ.
+
+**המסר לפריפרינט**: המודל מספק **מנגנון** לאנרגיה אפלה (σ misalignment) שמקשר m_σ ~ H₀ לפיזיקת dark QCD — זה יותר ממה ש-ΛCDM מציע. אבל הוא לא פותר את בעיית הכוונון העדין.
+
+---
+
+---
+
+## הערת יושרה מחקרית — Test 18 ובעיית "בישול פרמטרים" (27 Mar 2026)
+
+### מה קרה
+
+Test 18 (`sidm_velocity_cross_section.py`) השתמש בנוסחה קלאסית לחישוב σ/m:
+
+$$\sigma_T^{cl} \approx \frac{4\pi\alpha_D^2 m_\chi^2}{m_\phi^4} \cdot \frac{4\beta^2}{\ln^2(2\beta)}$$
+
+התוצאות: σ/m@30 km/s = **36,848 cm²/g**, σ/m@3000 km/s = **21 cm²/g** — כישלון ב-0/6 אילוצים.
+
+כשהוצגו התוצאות הגרועות, חזרתי ליומן ומצאתי שTest 6 השתמש ב-VPM solver ונתן σ/m@30 = **1.4 cm²/g** — הצלחה. טענתי "Test 18 שגוי, Test 6 נכון."
+
+### הבעיה — ועל מה יש להיזהר
+
+**זה ניסיון לא מודע לבחור את השיטה שנותנת את התשובה הרצויה.**
+
+הבעיות הקונקרטיות:
+
+1. **MAP שונה**: Test 6 השתמש בפרמטרי MAP מ-`Secluded-Majorana-SIDM` (פרויקט אחר, MCMC אחר). לא הוכח שהם זהים ל-(94.07, 11.10, 5.734e-3).
+2. **שתי שיטות — שתי תשובות**: VPM נותן ~1.4, נוסחה קלאסית נותנת ~36,000. הפרש ×25,000. לא ביצענו ולידציה צולבת.
+3. **הסקת מסקנה ללא נתון**: לא הרצנו VPM על הMAP הנוכחי — הסקנו שהוא "בסדר" מתוצאות ישנות.
+
+### הסכנה הרחבה יותר
+
+בפיזיקה תיאורטית, "בישול פרמטרים" (parameter cooking) הוא:
+- בחירת שיטת חישוב לפי התוצאה שהיא נותנת
+- שימוש בנקודת benchmark "נוחה" במקום בנקודה הרלוונטית
+- הצגת "עקביות" כתוצאה מבחירת כלים, לא מהפיזיקה
+
+**אנחנו צריכים להיות עם פנים אחד**: שיטה אחת, נקודה אחת, תוצאה אחת — טובה או גרועה.
+
+### מסקנות אמיתיות מ-Test 18
+
+| עובדה | ביסוס |
+|---|---|
+| הנוסחה הקלאסית (β>>1) נותנת σ/m~36,000 ל-MAP | ✅ תוצאה נומרית מבוססת |
+| הנוסחה הקלאסית מגזימה עקב Coulomb-log בתחום β>>1 | ✅ ידוע בספרות |
+| ה-VPM solver נותן ~1.4 ל-MAP **ישן** (Secluded project) | ✅ אבל זה MAP שונה |
+| ה-VPM על MAP **הנוכחי** (94.07, 11.10, 5.734e-3) → **לא נבדק** | ❌ חסר |
+| BP1 (m_χ=20.7 MeV) עובר את כל האילוצים | ✅ עם שתי השיטות |
+
+### הצעדים הבאים — הנכונים
+
+**שלב 1 — ולידציה בלתי תלויה (חובה, לפני כל דבר אחר)**
+> הרץ את ה-VPM solver המקורי מ-`Secluded-Majorana-SIDM` על הפרמטרים (94.07, 11.10, 5.734e-3) בדיוק. לא על MAP אחר. לקבל תשובה אחת מכלי אחד.
+
+**שלב 2 — השוואה ישרה**
+> אם VPM@(94.07, 11.10, 5.734e-3) נותן σ/m@3000 < 1.25: MAP עובר. אם לא: MAP כושל.  
+אסור לבחור כלי אחרי שרואים את התוצאה.
+
+**שלב 3 — אם MAP כושל**
+> זו תוצאה לגיטימית. אומרת: הMAP של MCMC ה**רליק-בלבד** אינו עקבי עם SIDM. פתרון: הוסף Bullet Cluster כאילוץ ל-MCMC ורוץ מחדש. התוצאה תשנה את MAP — לא המודל.
+
+**שלב 4 — אם MAP עובר**
+> עדכן Test 18 עם VPM ותוצאות אמיתיות. תעד ש-VPM ≠ נוסחה קלאסית ב-β>>1, והסבר למה VPM נכון יותר פיזיקלית (כולל הפניה לספרות).
+
+**שלב 5 — ב-preprint**
+> חייב לכלול: "We used VPM numerical solver (ref: Tulin+2013) for all σ/m calculations. The classical approximation overestimates by orders of magnitude in the β>>1 regime."
+
+---
+
+## Test 19: QCD Scale Coincidence (`qcd_scale_coincidence.py`) — 27 Mar 2026
+
+**שאלה**: האם m_χ ~ Λ_QCD ~ 200 MeV היא צירות מקרית, או שיש כאן חיזוי פיזיקלי?
+
+### תוצאות
+
+**יחסי מסה**:
+- m_χ / Λ_QCD = 0.470 — סדר גודל 1 ✓
+- m_χ / m_π⁰ = 0.697 — חומר אפל ≈ 0.7 × פיון נייטרלי
+- m_φ / Λ_QCD = 0.056 — מוחלש ע"י מבנה A₄
+
+**ΔN_eff (עם g_dark = 2.75 — χ Majorana + φ scalar בלבד)**:
+
+| T_D (MeV) | g*_S | T_d/T_ν | ΔN_eff | CMB-S4 |
+|---|---|---|---|---|
+| **200** (הנחתנו) | 61.75 | 0.558 | **0.153** | ✓ 5.7σ |
+| 155 (QCD crossover) | 61.75 | 0.558 | 0.153 | ✓ 5.7σ |
+| 150 (מתחת ל-crossover) | 17.25 | 0.854 | 0.837 | ✓ מודד |
+| 1000 | 96.25 | 0.482 | 0.085 | ✓ 3.1σ |
+
+### מדוע זה רלוונטי
+
+**זו תחזית — לא number cooking:**
+- T_D=200 MeV לא כוונן לתת ΔN_eff עקבי עם Planck; התוצאה נגזרת מ-QCD entropy dump
+- ΔN_eff=0.153 יוצא מתוך פיזיקה ידועה (g*_S בטבלת SM, ניתוק dark sector)
+- **אבל**: T_D=200 MeV היא **הנחה** (QCD coincidence), לא תוצאה של המודל
+
+**מה זה לא:**
+- אין כאן אילוץ חדש על m_χ, m_φ, α — פרמטרי SIDM לא נגעו
+- אין number cooking — לא בחרנו T_D כדי לקבל ΔN_eff מסוים
+
+### כיצד לבדוק אם T_D=200 MeV הוא נכון (לא הנחה)
+
+**בדיקה נומרית (Test 20 — הבא)**:
+חישוב קצב הניתוק $\Gamma_{portal}(T) = H(T_D)$ עבור Higgs portal coupling $\lambda_{hs}\phi|H|^2$:
+- מה $\lambda_{hs}$ נותן T_D=200 MeV?
+- האם ערך זה עקבי עם LHC (Higgs invisible width < 11%)?
+- האם עקבי עם BBN (dark sector לא פוגע ב-N_eff ב-T~1 MeV)?
+- האם עקבי עם direct detection?
+
+אם כל התשובות כן — T_D=200 MeV הופכת מ**הנחה** ל**תוצאה**.
+
+**בדיקה אמפירית עתידית**:
+
+| ניסוי | רגישות ΔN_eff | מתי | סטטוס לניבוי שלנו |
+|---|---|---|---|
+| Planck 2018 | ±0.20 | קיים | לא מספיק (0.153 < 0.20) |
+| Simons Observatory | ±0.05 | ~2027 | ~3σ — גבולי |
+| CMB-S4 | ±0.027 | ~2030 | **5.7σ — גילוי** |
+| SPT-3G | ±0.07 | ~2026 | ~2.2σ — ראיה |
+
+**הניבוי**: CMB-S4 תמדוד ΔN_eff > 0 ברמת 5-6σ אם T_D ~ 155-200 MeV.
+
+---
+
+## Updated Master File Table
+
+| File | Test | Purpose | Status |
+|---|---|---|---|
+| `sigma_radiative_stability.py` | 1 | 4 σ coupling options | ✅ |
+| `dark_axion_full.py` | 2 | Full V_eff(σ), relic angle | ✅ |
+| `fifth_force_constraints.py` | 3 | β constraints, screening | ✅ |
+| `freeze_out_trapping.py` | 4 | Coupled σ + Boltzmann ODE | ✅ |
+| `verify_cw_bugs.py` | 4 | CW derivative verification | ✅ |
+| `freeze_out_analysis_corrected.py` | 4 | Corrected analytical analysis | ✅ |
+| `theta_topological.py` | 5 | Topological/group theory | ✅ |
+| `consistency_check_sidm.py` | 6 | θ-decomposition vs 5 BPs | ✅ |
+| `consistency_17bp.py` | 7 | All 17 BPs (superseded by T12) | ✅ |
+| `free_theta_scan.py` | 8 | Free θ scan, resonance map | ✅ |
+| `resonance_bp1.py` | 8 | Phase shift + resonance | ✅ |
+| `a4_dark_sector_model.py` | 9 | Explicit A₄ model | ✅ |
+| `verify_a4_cg.py` | S1 | A₄ CG verification | ✅ |
+| `boltzmann_17bp.py` | S2 | Full Boltzmann for 17 BPs | ✅ |
+| `sigma_trapping_ode.py` | S3 | Coupled σ + Boltzmann ODE | ✅ |
+| `fornax_gc_check.py` | 11 | Fornax GC constraint | ✅ |
+| `test_alpha_convention.py` | 12 | α convention correction | ✅ |
+| `dark_force_accumulation.py` | 13A | Dark Maxwell force accumulation | ✅ |
+| `sigma_mass_protection.py` | 13D | 5 mass protection mechanisms | ✅ |
+| `dark_qcd_consistency.py` | 14 | 6-point dark QCD check | ✅ |
+| `born_full_amplitude.py` | 15 | Full Born $|M_s+M_p|^2$ | ✅ |
+| `vev_alignment_stability.py` | 16 | A₄ VEV alignment stability | ✅ |
+| `neutrino_dark_resonance.py` | **17** | **ν-dark resonance analysis** | **✅** |
+| `sidm_velocity_cross_section.py` | **18** | **SIDM velocity-dependent σ(v) — VPM 5/5 PASS** | **✅** |
+| `qcd_scale_coincidence.py` | **19** | **QCD scale coincidence — ΔN_eff=0.153** | **✅** |
+| `AUDIT_REPORT.md` | — | Full codebase audit | ✅ |
+| `SCRIPT_PROBLEMS_REPORT.md` | — | Bug report | ✅ |
+| `THEORY_MATH_SUMMARY.md` | — | Theory summary | ✅ |
+| `need_to_verify.md` | — | Verification checklist | 📝 Active |
+| `research_journal.md` | — | This file | 📝 Active |

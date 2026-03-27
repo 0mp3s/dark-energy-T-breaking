@@ -1503,6 +1503,76 @@ $$\sigma_T^{cl} \approx \frac{4\pi\alpha_D^2 m_\chi^2}{m_\phi^4} \cdot \frac{4\b
 
 ---
 
+---
+
+## Test 20: Portal Coupling for T_D = 200 MeV (`test20_portal_coupling.py`) — 28 Mar 2026
+
+**שאלה**: מה ה-portal coupling נדרש כדי ש-T_D=200 MeV תהיה תוצאה — לא הנחה?
+
+### פיזיקה
+
+מחשבים: בהינתן $\Gamma_{portal}(T_D) = H(T_D)$, מהו הקצב?
+
+**Portal A** (quadratic: $\lambda_{hs}\phi^2|H|^2$):
+- Process: $\phi + f \to \phi + f$ via t-channel virtual Higgs
+- Vertex: $g_{\phi\phi h} = 2\lambda_{hs}v$, Yukawa $m_f/v$
+- Rate: $\Gamma_A \sim T_D^3 \cdot \lambda_{hs}^2 \cdot m_{f,eff}^2/(4\pi m_h^4)$
+
+**Portal B** (linear mixing: $\kappa\phi|H|^2$):
+- Creates mixing angle $\theta_{mix} = \kappa v/m_h^2$
+- אותה נוסחת קצב אבל $\kappa$ במקום $2\lambda_{hs}$
+- **יתרון**: $\phi$ יכול להתפורר לSM דרך mixing
+
+### תוצאות עיקריות
+
+| כמות | Portal A | Portal B |
+|---|---|---|
+| Coupling ל-T_D=200 MeV | $\lambda_{hs} = 5.3 \times 10^{-4}$ | $\kappa = 5.3 \times 10^{-4}$ |
+| $\theta_{mix}$ | — | $8.3 \times 10^{-6}$ |
+| BR(h→inv) | **0.133%** ✓ | **0.033%** ✓ |
+| $\tau_\phi$ | ∞ (stable, Z₂) | **5 s** — אחרי BBN |
+| $\sigma_{SI}(\chi\text{-}N)$ | — | $3.9 \times 10^{-40}$ cm² ✓ |
+| LHC | ✓ | ✓ |
+| BBN (τ<1 s) | ✗ (stable) | ✗ (τ=5 s) |
+
+### המתח המרכזי
+
+**לא ניתן בו-זמנית**:
+1. $T_D = 200$ MeV (דורש $\kappa \sim 10^{-3}$), **ו-**
+2. $\phi \to e^+e^-$ לפני BBN (דורש $\kappa > 0.0012 \to T_D < 2$ MeV)
+
+טבלת סריקה ($\kappa$ vs $T_D$ vs $\tau_\phi$):
+
+| $\kappa$ | $T_D$ (MeV) | $\tau_\phi$ (s) | סטטוס |
+|---|---|---|---|
+| $5.6\times10^{-4}$ | 177 | 4.4 | ← T_D בטווח, τ גדול |
+| $1.3\times10^{-3}$ | 31.5 | 0.78 | ← BBN OK, T_D נמוך |
+
+**אין חפיפה** בין שני תחומים אלו.
+
+### נתיבי פתרון
+
+**Path 1** — $\phi$ יציב (CDM component):
+$\phi$ מתנהג כ-WIMP קל עם $m_\phi = 11$ MeV. דורש בדיקת $\Omega_\phi h^2$.
+
+**Path 2** — $\phi \to 2\sigma$ (dark pion decay) ✓ **מועדף**:
+$m_\phi = 11$ MeV $\gg 2 m_\sigma \approx 0$ → תמיד פתוח קינמטית.
+coupling: $\lambda_{\phi\sigma}\phi^2\sigma^2$ בתוך הסקטור האפל בלבד.
+$\phi$ מתפורר לפני BBN ללא צורך ב-SM portal גדול.
+השפעה על $\Delta N_{eff}$: $+0.027$ (זניח, $\sigma$ מוסיף כ-dark radiation).
+
+**Path 3** — FIMP scenario:
+Dark sector לא הגיע לשיווי משקל עם SM. $T_D$ כתנאי התחלה של ייצור FIMP, לא טמפרטורת ניתוק.
+
+### מסקנה
+
+> $T_D = 200$ MeV **נשארת הנחה מונעת** (לא תוצאה מוכחת).
+> בכל פורטל שנבדק: LHC ו-direct detection עוברים ✓.
+> המתח עם BBN ($\tau_\phi$) פתיר דרך $\phi \to 2\sigma$.
+> **חיזוי $\Delta N_{eff} = 0.153$ תקף ללא תלות במנגנון ייצור**.
+
+---
+
 ## Updated Master File Table
 
 | File | Test | Purpose | Status |
@@ -1532,6 +1602,7 @@ $$\sigma_T^{cl} \approx \frac{4\pi\alpha_D^2 m_\chi^2}{m_\phi^4} \cdot \frac{4\b
 | `neutrino_dark_resonance.py` | **17** | **ν-dark resonance analysis** | **✅** |
 | `sidm_velocity_cross_section.py` | **18** | **SIDM velocity-dependent σ(v) — VPM 5/5 PASS** | **✅** |
 | `qcd_scale_coincidence.py` | **19** | **QCD scale coincidence — ΔN_eff=0.153** | **✅** |
+| `test20_portal_coupling.py` | **20** | **Portal coupling for T_D=200 MeV — BBN tension + resolutions** | **✅** |
 | `AUDIT_REPORT.md` | — | Full codebase audit | ✅ |
 | `SCRIPT_PROBLEMS_REPORT.md` | — | Bug report | ✅ |
 | `THEORY_MATH_SUMMARY.md` | — | Theory summary | ✅ |

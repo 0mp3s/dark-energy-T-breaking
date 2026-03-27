@@ -20,3 +20,4 @@ Order,Test,Description,Script,Reads,Writes,Theory Section
 19,Test 17,VEV Alignment Stability,vev_alignment_stability.py,none,console,§3.3 VEV stability
 20,Test 18,SIDM Velocity Cross Section,sidm_velocity_cross_section.py,none,console,§4.1 σ(v)
 21,Test 19,QCD Scale Coincidence,qcd_scale_coincidence.py,none,console,§5.4 QCD coincidence
+22,Test 20,Portal Coupling for T_D,test20_portal_coupling.py,none,console,�6.1 Portal coupling

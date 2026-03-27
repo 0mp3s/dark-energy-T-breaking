@@ -34,7 +34,7 @@ print(f"ρ_Λ     = {rho_Lambda:.2e} GeV⁴")
 # ============= MAP Benchmark Point ==============
 m_chi  = 0.094    # GeV (94 MeV)
 m_phi  = 1e-3     # GeV (1 MeV)
-alpha  = 3.4e-3   # coupling
+alpha  = 5.734e-3 # coupling (MAP value; corrected from 3.4e-3)
 y      = np.sqrt(4 * np.pi * alpha)  # Yukawa coupling
 theta  = np.arcsin(1/3)
 y_s    = y * np.cos(theta)

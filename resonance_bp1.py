@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# ⚠️ SUPERSEDED — This script applies (8/9) reduction to α_CSV,
+# which is already α_s. See test_alpha_convention.py (Test 12).
+# Also: m_φ(BP1) corrected from 11.34 → 10.83 MeV (CSV source).
+# Buggy output archived in archived_buggy/resonance_bp1_BUGGY.txt
 """
 Resonance structure near BP1: σ/m(30) vs λ around the first Yukawa resonance.
 BP1: m_chi=20.69 GeV, m_phi=11.34 MeV, λ_new=1.70 (near λ_crit=1.68).
@@ -106,7 +110,7 @@ def sigma_T_vpm(m_chi, m_phi, alpha, v_km_s):
 #  BP1 parameters
 # ==============================================================
 M_CHI = 20.69       # GeV
-M_PHI = 11.34e-3    # GeV
+M_PHI = 10.83e-3    # GeV  (corrected from 11.34; CSV source)
 ALPHA_ORIG = 1.048e-3
 LAM_ORIG = ALPHA_ORIG * M_CHI / M_PHI  # 1.91
 

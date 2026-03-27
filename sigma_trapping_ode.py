@@ -48,7 +48,7 @@ m_phi = 11.10 * MeV
 alpha = 5.734e-3
 
 theta_relic = math.asin(1.0 / 3.0)   # 19.47°
-y_sq = 4 * math.pi * alpha            # y² = 4πα (total coupling)
+y_sq = 4 * math.pi * alpha / math.cos(theta_relic)**2  # y² = 4πα/cos²θ (total coupling)
 y = math.sqrt(y_sq)
 
 T_fo = m_chi / 20.0

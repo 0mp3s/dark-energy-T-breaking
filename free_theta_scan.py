@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# ⚠️ SUPERSEDED — This script applies (8/9) reduction to α_CSV,
+# which is already α_s. See test_alpha_convention.py (Test 12).
+# Qualitative trends valid; absolute σ/m values are ~11% low.
+# Buggy output archived in archived_buggy/free_theta_scan_BUGGY.txt
 """
 Free θ scan: σ/m(30) as function of θ for all 17 BPs.
 Question: Does Yukawa resonance structure prefer a specific θ?

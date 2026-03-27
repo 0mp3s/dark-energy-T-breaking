@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# ⚠️ SUPERSEDED — This script applies (8/9) reduction to α_CSV,
+# which is already α_s. See test_alpha_convention.py (Test 12).
+# Correct results: all 17 BPs pass with α_s = α_CSV (no reduction).
+# Buggy output archived in archived_buggy/consistency_check_sidm_BUGGY.txt
 """
 dark-energy-T-breaking/consistency_check_sidm.py
 =================================================

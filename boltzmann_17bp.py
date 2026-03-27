@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# ⚠️ SUPERSEDED — This script applies (8/9) reduction to α_CSV,
+# which is already α_s. See test_alpha_convention.py (Test 12).
+# Relic density Ωh² values are overestimated by ~27%.
+# Buggy output archived in archived_buggy/boltzmann_17bp_BUGGY.txt
 """
 boltzmann_17bp.py — Full Numerical Boltzmann for 17 BPs with α×(8/9)
 =====================================================================

@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# ⚠️ SUPERSEDED — This script applies (8/9) reduction to α_CSV,
+# which is already α_s. See test_alpha_convention.py (Test 12).
+# The "without decomposition" column is the correct result.
+# Buggy output archived in archived_buggy/fornax_gc_check_BUGGY.txt
 """
 Fornax GC timing constraint (Read+2019, 1808.06634):
   σ/m < 1.5 cm²/g  at  v ~ 10-20 km/s

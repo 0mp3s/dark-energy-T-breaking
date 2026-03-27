@@ -191,20 +191,35 @@ $$\Gamma_{tunnel} \sim \exp\left(-S_E^{instanton}\right), \quad S_E \sim \frac{\
 
 ### Test PI-3: Stochastic Path Integral — P(θ_i) מהינפלציה
 
-**שאלה**: מה הסבירות שσ/f ינחת קרוב ל-2 rad (הדרוש ל-$\Omega_\sigma = 0.69$)?  
+**שאלה**: מה הסבירות שσ/f ינחת קרוב ל-2 rad (הדרוש ל-H₀ = 67.4 ב-PI-7)?  
 **המנגנון**: בינפלציה, כל שדה סקלרי עובר **diffusion קוונטי** ב-de Sitter:
 
 $$\langle(\delta\sigma)^2\rangle = \frac{H_{inf}^2}{4\pi^2} \quad \text{per e-fold}$$
 
 לאחר $N$ e-folds: $P(\theta_i) = \mathcal{N}\exp\left(-\frac{\theta_i^2}{2\sigma_{rms}^2}\right)$ כאשר $\sigma_{rms} = \frac{H_{inf}}{2\pi f}\sqrt{N}$.
 
-**שאלת המחקר**:  
-עבור $H_{inf} \sim 10^{13}$ GeV, $f \sim 0.2\,M_{Pl}$, $N \sim 60$:
+**✗ נבדק — `test_PI3_stochastic_inflation.py` (commit `8fb75b9`)**
 
-$$\sigma_{rms} \approx \frac{10^{13}}{2\pi \times 2.4\times10^{18}}\sqrt{60} \approx 0.5 \text{ rad}$$
+| גודל | ערך | משמעות |
+|------|-----|--------|
+| $\sigma_{rms}$ (H_inf=10¹³ GeV) | $4.2\times10^{-6}$ rad | כמעט אפס |
+| $\theta_i / \sigma_{rms}$ | $4.75\times10^5$ — רחוק $5\times10^5$ סטיות תקן | כיוון עצום |
+| $P(\theta_i=2)$ | $\sim 10^{-4.9\times10^{10}}$ | fine-tuning קיצוני |
+| $H_{inf}$ לטבעיות 1σ | $4.75\times10^{18}$ GeV | 5 סדרי גודל **מעל** גבול Planck |
+| Drift/Diffusion ratio | $2.3\times10^{-98}$ | פוטנציאל $V(\theta)$ זניח לחלוטין |
 
-$P(\theta_i = 2) \propto e^{-8}$? או שהינפלציה מכניסה $\theta$ למאגן גדול?  
-**הנרטיב**: אם $P(\theta_i \sim 2) = O(1)$, אנחנו לא צריכים לתרץ את θ_i — היקום מבחר אותו סטטיסטית.
+**מסקנה**: $\theta_i = 2$ rad **לא** נוצר טבעית על-ידי de Sitter diffusion בסקלות אינפלציה CMB-מותרות.
+
+$\theta_i$ הוא **פרמטר חופשי** של המודל (זווית misalignment קלאסית).
+
+**השלכה על PI-7**: H₀ = 67.4 הוא consistency check נתון $\theta_i$, לא תחזית ללא פרמטר חופשי — **אלא אם PI-1 יראה attractor תרמי שמקבע $\theta_i \sim 2$ rad**.
+
+**שלוש אפשרויות**:
+1. (A) $\theta_i$ כתנאי התחלה קלאסי — H₀ = consistency check
+2. (B) attractor תרמי ב-$V_{eff}(\theta, T)$ — PI-1 יבדוק זאת
+3. (C) anthropic/landscape: patches עם $\theta_i \sim 2$ נותנות $\rho_\Lambda$ הנכונה
+
+**✗ PI-3 NEGATIVE RESULT — θ_i IS A FREE PARAMETER**
 
 ---
 
@@ -269,13 +284,13 @@ $$\ln\det = \text{Tr}\ln = \sum_\ell (2\ell+1) \ln e^{2i\delta_\ell} = 2i\sum_\e
 |------|------|----------------|-------------------|
 | PI-1 | האם θ נלכד בַּ-freeze-out? | Test 4: "לא, CW מנצח" (ODE) | V_eff(T) — תרמל exact תוך זרימה |
 | PI-2 | האם θ_A₄ יציב קוונטית? | ✅ נבדק — PASS | $S_E\sim10^{121}$, bubble wall = Hubble radius → **ABSOLUTELY STABLE** |
-| PI-3 | מאיפה θ_i ~ 2 rad? | לא נבדק | P(θ_i) מ-stochastic inflation |
+| PI-3 | מאיפה θ_i ~ 2 rad? | ✗ **FAIL (negative)** | $\sigma_{rms}=4\times10^{-6}$ rad; gap 5 סדרי גודל; θ_i **פרמטר חופשי** |
 | PI-4 | האם α ב-UV תקין? | לא נבדק | RG flow עד $M_{Pl}$ |
 | PI-5 | האם screening ב-גלקסיה מדויק? | Test 3: הערכה | V_eff(n_χ): exact chameleon |
 | PI-6 | האם VPM exact? | Test 15: σ_p זניח | ✅ VPM = fluctuation determinant |
 
 **סדר עדיפות מוצע**:
 1. ~~**PI-2 (אינסטנטון)**~~ — ✅ **DONE** — $S_E\sim10^{121}$, θ_A₄ יציב לחלוטין. `8873be1`
-2. **PI-3 (הסתברות ינפלציה)** — 🔴 **NEXT** — מסביר θ_i ~ 2 rad בלי לתרץ. אם $P(\theta_i\sim2)=O(1)$, H₀=67.4 הוא דרישה סטטיסטית.
-3. **PI-1 (V_eff תרמי)** — מחליף Test 4 בדרך מדויקת
+2. ~~**PI-3 (stochastic inflation)**~~ — ✗ **DONE (negative)** — θ_i פרמטר חופשי; gap 5 סדרי גודל מ-CMB. `8fb75b9`
+3. **PI-1 (V_eff תרמי)** — 🔴 **NEXT** — האם attractor תרמי ב-$V_{eff}(\theta,T_{fo})$ מקבע $\theta_i\sim2$? **אם כן: H₀=67.4 הופך לתחזית אמיתית.**
 4. **PI-5 (in-medium)** — מאמת Test 3 כמותית

@@ -148,6 +148,30 @@ This document lists all claims that require independent verification before this
 
 ---
 
+## 7. Dark Sector Production Mechanism
+
+### 7a. Test 21 — FIMP Freeze-In Production
+
+| | |
+|---|---|
+| **Claim** | Dark sector produced via freeze-in (FIMP) with coupling λ_hs ~ 5×10⁻⁴, giving T_D = 200 MeV as effective initial temperature |
+| **What to verify** | Compute Ω_χ h² via freeze-in integral: $\Omega_{FIMP} \propto \int dT \, \frac{g_{SM} T}{H} \Gamma_{prod}(T)$; check if result is consistent with Ω_DM h² = 0.120 |
+| **Where** | `dark-energy-T-breaking/` — new script `test21_fimp_production.py` |
+| **How** | 1. Integrate production rate Γ(T) from T_RH down to T_D <br> 2. Compare to observed relic density <br> 3. If Ω_FIMP > Ω_DM → overproduction, need smaller coupling <br> 4. If Ω_FIMP << Ω_DM → T_D is NOT the decoupling temperature, something else sets the abundance |
+| **Priority** | 🔴 HIGH — T_D = 200 MeV remains an assumption until this is verified |
+
+### 7b. Test 22 — ΔN_eff Including φ → 2σ
+
+| | |
+|---|---|
+| **Claim** | After φ → 2σ (dark pions), the total ΔN_eff picks up an extra contribution from σ as dark radiation: ΔN_eff = 0.153 (from χ + φ before decay) + 0.027 (from σ after φ decay) ≈ 0.180 |
+| **What to verify** | (a) Timing: does φ → 2σ happen before or after neutrino decoupling (T ~ 2 MeV)? <br> (b) Exact ΔN_eff from σ: depends on whether σ inherits φ's temperature or thermalizes in dark sector <br> (c) Is ΔN_eff = 0.180 still consistent with Planck (< 0.33)? |
+| **Where** | `dark-energy-T-breaking/` — new script `test22_neff_phi_decay.py` |
+| **How** | 1. Compute τ_φ for φ → 2σ from λ_{φσ} coupling <br> 2. Compare T at φ decay vs T_ν_decouple = 2 MeV <br> 3. Track entropy flow: if φ decays before ν decouple, σ heats ν sector → modifies ΔN_eff <br> 4. Full ΔN_eff formula including σ dof |
+| **Priority** | 🔴 HIGH — closes the BBN tension from Test 20 and finalizes the ΔN_eff prediction |
+
+---
+
 ## Verification Priority Summary
 
 | Priority | Item | Where | Blocking? |
@@ -162,5 +186,7 @@ This document lists all claims that require independent verification before this
 | 🟡 MEDIUM | Fifth force screening | `dark-energy-T-breaking/` | No |
 | 🟡 MEDIUM | Coupled Boltzmann + σ(T) | `Secluded-Majorana-SIDM/` | No |
 | 🟡 MEDIUM | A₄ + neutrino consistency | `dark-energy-T-breaking/` | No |
-| 🟢 LOW | TBM corrections to θ_dark | `dark-energy-T-breaking/` | No |
+| � HIGH | **Test 21: FIMP production** | `dark-energy-T-breaking/` | **Yes — T_D=200 MeV assumption** |
+| 🔴 HIGH | **Test 22: ΔN_eff with φ→2σ** | `dark-energy-T-breaking/` | **Yes — finalizes ΔN_eff prediction** |
+| �🟢 LOW | TBM corrections to θ_dark | `dark-energy-T-breaking/` | No |
 | 🟢 LOW | VPM solver validation | `Secluded-Majorana-SIDM/` | No |

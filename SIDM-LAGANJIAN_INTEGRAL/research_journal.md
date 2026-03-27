@@ -150,7 +150,21 @@ $$V_{eff}(\sigma, T) = V_{CW}(\sigma) + \frac{T^4}{2\pi^2}\int_0^\infty dp\; p^2
 האם ב-$T = T_{fo}$ יש מינימום ב-$V_{eff}(\sigma, T)$ ב-$\theta_{relic}$?  
 Test 4 מצא ש-CW מגלגל ל-$\pi/2$ — פוטנציאל תרמי יכול לשנות זאת בצורה דרמטית בסמוך ל-$T \sim m_\chi$.
 
-**תוצאה צפויה**: $V_{eff}(\theta, T_{fo})$ תפתח מינימום ב-$\theta = 0$ בטמפ' גבוהות (שיחזור קירלי), ואז יגלגל ל-$\pi/2$ בקירור — בדיוק כמו פאזה בין-מינימלית ב-QCD. השאלה: האם הגלגול עובר דרך $\theta_{relic}$ ונלכד שם?
+**✗ נבדק — `test_PI1_thermal_veff.py` (commit `9833519`)**
+
+| גודל | ערך ב-$T_{fo}$ | משמעות |
+|------|---------------|--------|
+| $\theta_{min}(T_{fo})$ | $1.57$ rad = $\pi/2$ | CW שולט, תרמי זניח |
+| $\theta_{min}(T=0)$ | $1.57$ rad = $\pi/2$ | CW לא משתנה |
+| $\theta_{min}(T=10m_\chi)$ | $0.01$ rad | תרמי דוחף ל-$\theta=0$ |
+| $V_{QCD}/V_{CW}$ ב-$T_{fo}$ | $6.4\times10^{-116}$ | QCD מדוכא לחלוטין |
+| $V_T/V_{CW}$ ב-$T_{fo}$ | $1.2\times10^{-4}$ | תרמי זניח (Boltzmann suppressed) |
+
+**סיבה פיזיקלית**: $V_{CW}$ מינימום ב-$\theta=\pi/2$ כי $m_\chi(\pi/2) = m_\chi/3$ → אנרגיית לולאה נמוכה ביותר. הפוטנציאל התרמי $V_T$ מנסה לדחוף ל-$\theta=0$ בטמפ' גבוהות, אבל **Boltzmann-suppressed כבר ב-$T=T_{fo}$** כי $m_\chi/T_{fo} = x_{fo} \approx 20$.
+
+**מסקנה**: **אין attractor תרמי ב-$\theta \sim 2$ rad.** $V_{eff}(\theta, T)$ תמיד ממזערת ב-$\theta=\pi/2$, לא ב-$\theta_i$.
+
+**✗ PI-1 NEGATIVE RESULT — θ_i CONFIRMED AS FREE PARAMETER**
 
 ---
 
@@ -282,7 +296,7 @@ $$\ln\det = \text{Tr}\ln = \sum_\ell (2\ell+1) \ln e^{2i\delta_\ell} = 2i\sum_\e
 
 | Test | שאלה | מה הנגזרת נתנה | מה האינטגרל מוסיף |
 |------|------|----------------|-------------------|
-| PI-1 | האם θ נלכד בַּ-freeze-out? | Test 4: "לא, CW מנצח" (ODE) | V_eff(T) — תרמל exact תוך זרימה |
+| PI-1 | האם θ נלכד בַּ-freeze-out? | ✗ **FAIL (negative)** | $\theta_{min}(T_{fo})=\pi/2$; $V_T/V_{CW}\sim10^{-4}$; θ_i **פרמטר חופשי** |
 | PI-2 | האם θ_A₄ יציב קוונטית? | ✅ נבדק — PASS | $S_E\sim10^{121}$, bubble wall = Hubble radius → **ABSOLUTELY STABLE** |
 | PI-3 | מאיפה θ_i ~ 2 rad? | ✗ **FAIL (negative)** | $\sigma_{rms}=4\times10^{-6}$ rad; gap 5 סדרי גודל; θ_i **פרמטר חופשי** |
 | PI-4 | האם α ב-UV תקין? | לא נבדק | RG flow עד $M_{Pl}$ |
@@ -292,5 +306,7 @@ $$\ln\det = \text{Tr}\ln = \sum_\ell (2\ell+1) \ln e^{2i\delta_\ell} = 2i\sum_\e
 **סדר עדיפות מוצע**:
 1. ~~**PI-2 (אינסטנטון)**~~ — ✅ **DONE** — $S_E\sim10^{121}$, θ_A₄ יציב לחלוטין. `8873be1`
 2. ~~**PI-3 (stochastic inflation)**~~ — ✗ **DONE (negative)** — θ_i פרמטר חופשי; gap 5 סדרי גודל מ-CMB. `8fb75b9`
-3. **PI-1 (V_eff תרמי)** — 🔴 **NEXT** — האם attractor תרמי ב-$V_{eff}(\theta,T_{fo})$ מקבע $\theta_i\sim2$? **אם כן: H₀=67.4 הופך לתחזית אמיתית.**
-4. **PI-5 (in-medium)** — מאמת Test 3 כמותית
+3. ~~**PI-1 (V_eff תרמי)**~~ — ✗ **DONE (negative)** — $\theta_{min}(T_{fo})=\pi/2$; אין attractor; θ_i פרמטר חופשי. `9833519`
+4. **Test 21 (FIMP/relic density)** — ✗ **DONE** — `<σv>_bare = πα_D²/4m_χ² = 3.4×10⁻²⁰ cm³/s >> 3×10⁻²⁶` (Planck target) פקטור 10⁶; κ=5.3×10⁻⁴ → dark sector in thermal equilibrium, NOT FIMP; Sommerfeld-enhanced Boltzmann required for Ω h²=0.12. `efe9b8a`
+5. **PI-5 (in-medium)** — מאמת Test 3 כמותית
+6. **Test 22 (ΔN_eff + φ→2σ)** — 🔴 **NEXT** — BBN/CMB constraint on dark sector dof

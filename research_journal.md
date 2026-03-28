@@ -2275,3 +2275,78 @@ $S_\text{inst} \cdot f \leq M_\text{Pl}$: ב-IR (coupling חזק), $S_\text{inst
 ✅ **WGC: f < M_Pl** — מסופק
 ⚠️ **f = 0.27 M_Pl** ← תלוי ב-$\theta_i$; ל-DESI $\theta_i \sim 2.9$: $f \approx 0.17\,M_\text{Pl}$
 📊 **מודל עם 2 פרמטרים חופשיים**: $\alpha_d$ ו-$\theta_i$ — predictive!
+
+---
+
+## Test 30: ΔN_eff from σ — Dark Radiation & CMB-S4 Predictions — 28 Mar 2026
+
+**Script:** `hunt_H0/delta_neff_sigma.py`
+
+### Goal
+Compute σ (dark pion) contribution to N_eff. Does the ultralight pNGB affect dark radiation?
+
+### Key Results
+
+**Part 1 — Analytic ΔN_eff (CORRECTION from Test 22)**
+
+The journal's previous claim of ΔN_eff = 0.214 for "σ thermalized" was based on an implicit assumption
+of partial thermalization (T_d/T_SM ~ 0.5). The correct full-thermalization result:
+
+| Scenario | ΔN_eff | Status |
+|---|---|---|
+| σ decouples from SM above EW (g=106.75) | 0.027 | Invisible |
+| φ→2σ non-thermal only | ≤ 0.056 | Invisible |
+| Full dark sector thermal with SM → entropy into σ | **3.23** | **EXCLUDED** |
+| No thermalization (natural couplings) | **≈ 0** | Baseline prediction |
+
+**Critical constraint:** Full dark sector thermalization gives ΔN_eff = 3.23 (> 2σ Planck limit ~0.7).
+→ **Validates** the secluded assumption: dark sector was NEVER in full thermal equilibrium with SM.
+
+Dark sector d.o.f.: SU(2) gluons (6) + 3 Majorana (5.25) + φ (1) + σ (1) = g_d^S = 13.25.
+After dark confinement: only σ survives → entropy concentration factor = (13.25)^{1/3} = 2.37.
+
+**Part 2 — H₀ shift from ΔN_eff**
+
+Scanned ΔN_eff = 0 to 0.4 in the Layer 8 ODE (modified radiation density, same σ dynamics):
+
+**Result: δH₀ < 0.01 km/s/Mpc for any ΔN_eff < 0.4**
+
+Radiation density Ω_r ~ 10⁻⁴ today → ΔN_eff modifies ρ_r by ~7% at most → effect on H₀ negligible.
+**ΔN_eff and H₀ are effectively independent observables.**
+
+**Part 3 — CMB-S4 forecast**
+
+| Experiment | σ(N_eff) | ΔN_eff = 0.027 | ΔN_eff = 0.214* |
+|---|---|---|---|
+| Planck 2018 | ±0.20 | 0.1σ | 1.1σ |
+| Simons Obs. | ±0.05 | 0.5σ | 4.3σ |
+| CMB-S4 | ±0.027 | 1.0σ | **7.9σ** |
+| CMB-S4 + DESI | ±0.020 | 1.3σ | **11σ** |
+
+*ΔN_eff = 0.214 requires partial thermalization (T_d/T_SM ~ 0.5), not the default model.
+
+**Part 4 — Thermalization condition (KEY)**
+
+Natural coupling: g_φσ ~ Λ_d³/f² = 1.85 × 10⁻⁸⁰ GeV
+Decay rate: Γ(φ→σσ) = g_φσ²/(8π m_φ) = 1.4 × 10⁻¹⁵⁹ GeV
+Hubble at freeze-out: H(T_fo = 5 GeV) = 3.0 × 10⁻¹⁷ GeV
+
+**Γ/H = 4.6 × 10⁻¹⁴³** — σ is out of equilibrium by 143 orders of magnitude.
+
+Minimum cubic for thermalization: μ₃_min = 2.7 × 10⁻⁹ GeV (gap of 10⁷¹).
+Cannibal λ_4 ~ Λ_d⁴/f⁴ = 10⁻¹³¹ → no self-thermalization either.
+
+### Conclusions
+
+1. **Baseline prediction: ΔN_eff ≈ 0** — natural couplings prevent σ thermalization
+2. **Full thermalization EXCLUDED (ΔN_eff = 3.23 > Planck 2σ)** — validates secluded model
+3. **ΔN_eff and H₀ decouple** — independent probes (UV vs IR physics)
+4. **Correction:** Journal Test 22 value ΔN_eff = 0.214 required partial thermalization assumption
+5. **Falsifiable:** If CMB-S4 finds ΔN_eff > 0.05 → UV coupling beyond naive chiral perturbation
+
+### סטטוס
+
+✅ **Natural model → ΔN_eff ≈ 0** (σ never thermalizes)
+✅ **ΔN_eff = 3.23 EXCLUDED** → dark sector secluded (BBN validates)
+✅ **ΔN_eff and H₀ are independent** (δH₀ < 0.01 km/s/Mpc for all ΔN_eff)
+📊 **Falsifiable by CMB-S4:** ΔN_eff > 0.05 would indicate UV-completion effects

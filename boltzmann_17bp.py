@@ -66,12 +66,12 @@ def g_star_S(T):
 #  Boltzmann solver (copied from v27_boltzmann_relic.py, self-contained)
 # =============================================================================
 def Y_eq_full(x, m_chi, g_chi=2):
-    """Y_eq = 45/(4π⁴) × g/g_*S × x^{3/2} × exp(-x)  (non-relativistic)."""
+    """Y_eq = 45/(4π⁴) × g/g_*S × √(π/2) × x^{3/2} × exp(-x)  (non-relativistic, K₂ NR limit)."""
     T = m_chi / x
     g_s = g_star_S(T)
     if x > 300:
         return 0.0
-    return 45.0 / (4 * math.pi**4) * g_chi / g_s * x**1.5 * math.exp(-x)
+    return 45.0 / (4 * math.pi**4) * g_chi / g_s * math.sqrt(math.pi / 2) * x**1.5 * math.exp(-x)
 
 def dYdx(x, Y, m_chi, sv0, g_chi=2):
     """dY/dx for s-wave: ⟨σv⟩ = sv0 = constant."""

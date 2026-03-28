@@ -1459,25 +1459,36 @@ $$\sigma_T^{cl} \approx \frac{4\pi\alpha_D^2 m_\chi^2}{m_\phi^4} \cdot \frac{4\b
 - m_χ / m_π⁰ = 0.697 — חומר אפל ≈ 0.7 × פיון נייטרלי
 - m_φ / Λ_QCD = 0.056 — מוחלש ע"י מבנה A₄
 
-**ΔN_eff (עם g_dark = 2.75 — χ Majorana + φ scalar בלבד)**:
+**ΔN_eff — טבלת massless limit (לייחוס בלבד, ~~לא~~ ΔN_eff הפיזיקלי)**:
 
-| T_D (MeV) | g*_S | T_d/T_ν | ΔN_eff | CMB-S4 |
+| T_D (MeV) | g*_S | T_d/T_ν | ΔN_eff (massless) | הערה |
 |---|---|---|---|---|
-| **200** (הנחתנו) | 61.75 | 0.558 | **0.153** | ✓ 5.7σ |
-| 155 (QCD crossover) | 61.75 | 0.558 | 0.153 | ✓ 5.7σ |
-| 150 (מתחת ל-crossover) | 17.25 | 0.854 | 0.837 | ✓ מודד |
-| 1000 | 96.25 | 0.482 | 0.085 | ✓ 3.1σ |
+| **200** (הנחתנו) | 61.75 | 0.558 | 0.153 | ⚠️ **שגוי** — ראו תיקון למטה |
+| 155 (QCD crossover) | 61.75 | 0.558 | 0.153 | ⚠️ **שגוי** |
+| 150 (מתחת ל-crossover) | 17.25 | 0.854 | 0.837 | ⚠️ **שגוי** |
+| 1000 | 96.25 | 0.482 | 0.085 | ⚠️ **שגוי** |
+
+> **⚠️ תיקון (28 Mar 2026 — בעקבות T22 + בדיקת Check 4):**
+> הנוסחה $\Delta N_{eff} = (4/7) g_d \xi^4$ מניחה שכל המינים **חסרי מסה** (relativistic) בזמן BBN.
+> בפועל: $m_\chi \sim 94$ MeV ו-$m_\phi \sim 11$ MeV, ואילו $T_d(\text{BBN}) \approx 0.56$ MeV.
+> לכן $m_\chi / T_d \sim 170,000$ ו-$m_\phi / T_d \sim 20$ — **שניהם NR ומדוכאים אקספוננציאלית (Boltzmann)**.
+>
+> **התוצאה הנכונה**: $\Delta N_{eff} \approx 0$ (BP1: $2.6 \times 10^{-9}$, MAP: $5.0 \times 10^{-7}$).
+> זה תואם ל-`arxiv/main.tex §3.5` שכבר כתוב בו $\Delta N_{eff} \approx 0$.
+> Planck ($< 0.30$): **TRIVIALLY SATISFIED ✓**.
 
 ### מדוע זה רלוונטי
 
-**זו תחזית — לא number cooking:**
-- T_D=200 MeV לא כוונן לתת ΔN_eff עקבי עם Planck; התוצאה נגזרת מ-QCD entropy dump
-- ΔN_eff=0.153 יוצא מתוך פיזיקה ידועה (g*_S בטבלת SM, ניתוק dark sector)
-- **אבל**: T_D=200 MeV היא **הנחה** (QCD coincidence), לא תוצאה של המודל
+**ΔN_eff ≈ 0 עבור ה-secluded SIDM model (Paper 1):**
+- χ ו-φ הם **massive** → בזמן BBN הם NR ולא תורמים לקרינה
+- הנוסחה הישנה (0.153) ספרה d.o.f. בזמן ניתוק ($T_D = 200$ MeV, שם χ,φ relativistic), אבל ΔN_eff נמדד ב-BBN ($T \sim 1$ MeV)
+- **זו לא תחזית — זה כמו לזרוק חץ ולצייר סביבו מטרה**
+- התיקון: אינטגרל מספרי של $\rho(m,T)/\rho(0,T)$ עם דיכוי Boltzmann → ΔN_eff ≈ 0
 
-**מה זה לא:**
-- אין כאן אילוץ חדש על m_χ, m_φ, α — פרמטרי SIDM לא נגעו
-- אין number cooking — לא בחרנו T_D כדי לקבל ΔN_eff מסוים
+**מה **כן** יכול לתת ΔN_eff ≠ 0 (Paper 2 — dark QCD):**
+- אם σ (dark pion) מתרמלז: $\Delta N_{eff} = 0.214$ (g_σ = 1 scalar, massless)
+- אם σ מגיע רק מ-φ→2σ: $\Delta N_{eff} \leq 0.056$
+- σ כנראה **לא** מתרמלז ($g_{\phi\sigma} \sim 10^{-19}$)
 
 ### כיצד לבדוק אם T_D=200 MeV הוא נכון (לא הנחה)
 
@@ -1492,14 +1503,14 @@ $$\sigma_T^{cl} \approx \frac{4\pi\alpha_D^2 m_\chi^2}{m_\phi^4} \cdot \frac{4\b
 
 **בדיקה אמפירית עתידית**:
 
-| ניסוי | רגישות ΔN_eff | מתי | סטטוס לניבוי שלנו |
+| ניסוי | רגישות ΔN_eff | מתי | סטטוס |
 |---|---|---|---|
-| Planck 2018 | ±0.20 | קיים | לא מספיק (0.153 < 0.20) |
-| Simons Observatory | ±0.05 | ~2027 | ~3σ — גבולי |
-| CMB-S4 | ±0.027 | ~2030 | **5.7σ — גילוי** |
-| SPT-3G | ±0.07 | ~2026 | ~2.2σ — ראיה |
+| Planck 2018 | ±0.20 | קיים | ΔN_eff ≈ 0 → trivially OK |
+| Simons Observatory | ±0.05 | ~2027 | לא יזהה אות (secluded) |
+| CMB-S4 | ±0.027 | ~2030 | לא יזהה אות (secluded) |
+| SPT-3G | ±0.07 | ~2026 | לא יזהה אות (secluded) |
 
-**הניבוי**: CMB-S4 תמדוד ΔN_eff > 0 ברמת 5-6σ אם T_D ~ 155-200 MeV.
+**עדכון (28 Mar 2026)**: ΔN_eff ≈ 0 ב-secluded model → אין אות CMB-S4. אם σ (dark pion, Paper 2) מתרמלז, אז ΔN_eff = 0.214 → **CMB-S4 יזהה ב-~8σ**.
 
 ---
 
@@ -1569,7 +1580,8 @@ Dark sector לא הגיע לשיווי משקל עם SM. $T_D$ כתנאי התח
 > $T_D = 200$ MeV **נשארת הנחה מונעת** (לא תוצאה מוכחת).
 > בכל פורטל שנבדק: LHC ו-direct detection עוברים ✓.
 > המתח עם BBN ($\tau_\phi$) פתיר דרך $\phi \to 2\sigma$.
-> **חיזוי $\Delta N_{eff} = 0.153$ תקף ללא תלות במנגנון ייצור**.
+> ~~**חיזוי $\Delta N_{eff} = 0.153$ תקף ללא תלות במנגנון ייצור**.~~
+> **תיקון**: $\Delta N_{eff} \approx 0$ — χ ו-φ NR ב-BBN, Boltzmann מדוכא. ראו T22.
 
 ---
 
@@ -1601,10 +1613,291 @@ Dark sector לא הגיע לשיווי משקל עם SM. $T_D$ כתנאי התח
 | `vev_alignment_stability.py` | 16 | A₄ VEV alignment stability | ✅ |
 | `neutrino_dark_resonance.py` | **17** | **ν-dark resonance analysis** | **✅** |
 | `sidm_velocity_cross_section.py` | **18** | **SIDM velocity-dependent σ(v) — VPM 5/5 PASS** | **✅** |
-| `qcd_scale_coincidence.py` | **19** | **QCD scale coincidence — ΔN_eff=0.153** | **✅** |
+| `qcd_scale_coincidence.py` | **19** | **QCD scale coincidence — ΔN_eff ≈ 0 (corrected from 0.153)** | **✅** |
 | `test20_portal_coupling.py` | **20** | **Portal coupling for T_D=200 MeV — BBN tension + resolutions** | **✅** |
 | `AUDIT_REPORT.md` | — | Full codebase audit | ✅ |
 | `SCRIPT_PROBLEMS_REPORT.md` | — | Bug report | ✅ |
 | `THEORY_MATH_SUMMARY.md` | — | Theory summary | ✅ |
+| `test22_neff_phi_decay.py` | **22** | **ΔN_eff including φ→2σ — secluded ≈ 0, σ-dependent for Paper 2** | **✅** |
 | `need_to_verify.md` | — | Verification checklist | 📝 Active |
 | `research_journal.md` | — | This file | 📝 Active |
+
+---
+
+## Test 22: ΔN_eff Including φ → 2σ (`test22_neff_phi_decay.py`) — 28 Mar 2026
+
+**שאלה**: מה ΔN_eff כולל — כולל אפקט הדעיכה φ → 2σ (dark pions)?
+
+### בעיית המוצא — הנוסחה השגויה
+
+הנוסחה הישנה: $\Delta N_{eff} = (4/7) g_d \xi^4$ עם $g_d = 2.75$, $\xi = 0.558$ → **0.153**.
+
+**הבעיה**: הנוסחה מניחה שכל המינים **relativistic** (חסרי מסה) בזמן BBN.
+בפועל: $m_\chi = 94$ MeV, $m_\phi = 11$ MeV, $T_d(BBN) = 0.56$ MeV.
+$m_\chi / T_d \approx 170,000$ → דיכוי Boltzmann $e^{-170000}$ → **אפס**.
+$m_\phi / T_d \approx 20$ → דיכוי $e^{-20}$ → **אפס**.
+
+**ברגע שנלקח בחשבון**: הנוסחה הנכונה משתמשת באינטגרל מספרי:
+$$f(x) = \frac{\rho(m,T)}{\rho(0,T)} = \frac{\int p^2 \sqrt{p^2+m^2} / (e^{E/T}\pm 1)\, dp}{\int p^3 / (e^p \pm 1)\, dp}$$
+עבור $x = m/T \gg 3$: $f(x) \to 0$ אקספוננציאלית.
+
+### תוצאות
+
+**3 תרחישים:**
+
+| תרחיש | ΔN_eff | הסבר |
+|---|---|---|
+| **ללא σ** (secluded model, Paper 1) | **≈ 0** ($\sim 10^{-9}$ to $10^{-7}$) | χ,φ are NR at BBN → Boltzmann suppressed |
+| **σ מתרמלז** (dark QCD, Paper 2) | **0.214** | $g_\sigma = 1$ massless scalar, אנטרופיה מרוכזת |
+| **σ מ-φ→2σ בלבד** | **≤ 0.056** | non-thermal, energy injection מ-φ |
+
+**תוצאות מספריות (Check 4 מתוקן):**
+
+| BP | $m_\chi$ [MeV] | $m_\phi$ [MeV] | $m_\chi/T_d$ | ΔN_eff |
+|---|---|---|---|---|
+| BP1 | 55.0 | 10.0 | ~98,000 | $2.6 \times 10^{-9}$ |
+| MAP | 98.2 | 13.1 | ~175,000 | $5.0 \times 10^{-7}$ |
+
+### מה תוקן
+
+1. **`test_physics_checks.py` (Check 4)**: נכתב מחדש עם `_rho_massive_ratio()` — אינטגרל מספרי של $\rho(m,T)$. Part A = massless limit (לייחוס, labeled "WRONG"), Part B = physical at BBN (labeled "CORRECT").
+2. **`test22_neff_phi_decay.py` (Part G)**: תוקן math bug — entropy boost נותן $\Delta N_{eff} = 0.214$, לא "preserved" 0.153.
+3. **`arxiv/main.tex §3.5`**: כבר נכון — כתוב $\Delta N_{eff} \approx 0$. לא נדרש שינוי.
+
+### השפעה
+
+- **Paper 1 (SIDM)**: לא מושפע. הפיזיקה המרכזית (relic, σ(v), A₄) לא תלויה ב-ΔN_eff.
+- **Paper 2 (dark QCD + T-breaking)**: תחזית אמיתית אם σ מתרמלז: ΔN_eff = 0.214 → CMB-S4 ~8σ.
+- **θ = 19.47° duality**: לא מושפע — מבני (group theory), לא קוסמולוגי.
+
+### לקח
+
+> **"לזרוק חץ ולצייר סביבו מטרה"**: הנוסחה הישנה ספרה d.o.f. בזמן ניתוק ($T_D$) אבל ΔN_eff נמדד ב-BBN ($T \sim 1$ MeV). שתי הטמפרטורות שונות בסדרי גודל. הטעות: להשתמש בנוסחה של particles massless כשהם לא.
+
+---
+
+## Test 23: Layer 8 — σ(t) ⊗ Friedmann → H₀ (`hunt_H0/layer8_cosmic_ode.py`) — 28 Mar 2026
+
+**שאלה**: האם אפשר לגזור את $H_0$ כ**פלט** של הלגרנז'יאן, לא כקלט?
+
+### הרקע
+
+אופוס הציע "שכבה 8" — פותר ODE מצומד של שדה $\sigma$ (dark axion/pion) עם משוואת פרידמן:
+
+$$\ddot\sigma + 3H(t)\dot\sigma + V'(\sigma) = 0$$
+$$H^2(t) = \frac{8\pi}{3M_{\rm Pl}^2}\Big[\rho_r(a) + \rho_m(a) + \tfrac{1}{2}\dot\sigma^2 + V(\sigma)\Big]$$
+
+6 קלטים מהלגרנז'יאן: $m_\chi, m_\phi, \alpha_D, f, \Lambda_d, \theta_i$ → $H_0$ כפלט.
+
+### מימוש
+
+הקוד `layer8_cosmic_ode.py` פותר בזמן $N = \ln a$ (e-folds):
+
+$$\frac{d\sigma}{dN} = p, \qquad \frac{dp}{dN} = -(3-\epsilon)\, p - \frac{V'(\sigma)}{H^2}$$
+
+כש-$H^2 = (\rho_r + \rho_m + V(\sigma))/(3M_{\rm Pl}^2 - \frac{1}{2}p^2)$ נפתר אלגברית בכל צעד.
+
+- `solve_ivp` (RK45, rtol=$10^{-12}$) מ-$N_{\rm RH} = -42$ (reheating) עד $N = 0$ (היום)
+- $\rho_r \propto a^{-4}$, $\rho_m = (\Omega_\chi h^2 + \Omega_b h^2) \times \rho_{\rm unit} \times a^{-3}$
+- $V(\sigma) = \Lambda_d^4(1 - \cos(\sigma/f))$ — dark QCD chiral perturbation
+
+### תוצאות מרכזיות
+
+**Analysis 2: סריקת $\theta_i$ עם $\Lambda_d = 2$ meV, $f = 0.27 M_{\rm Pl}$:**
+
+| $\theta_i$ (rad) | $H_0$ (km/s/Mpc) | $\Omega_{\rm DE}$ | $w_\sigma$ | הערה |
+|---|---|---|---|---|
+| 2.0 | 40.8 | 0.14 | −0.36 | σ נדנד, V נשחק |
+| 2.5 | 48.0 | 0.38 | +0.93 | אזור מעבר |
+| **3.0** | **71.1** | **0.72** | **−0.86** | **טווח Planck** |
+| **3.1** | **73.1** | **0.73** | **−0.99** | **התאמה SH0ES!** |
+
+(עם $\Omega_\chi h^2 = 0.120$ — ערך נצפה מהפייפליין)
+
+**Analysis 3: סריקת $f$ עם $\Lambda_d = 1.72$ meV, $\theta_i = 2.0$:**
+
+- $f \ll M_{\rm Pl}$: $m_\sigma \gg H_0$ → σ מנדנד עד הקרקע → $V \to 0$ → אין DE
+- $f \gg M_{\rm Pl}$: $m_\sigma \ll H_0$ → σ קפוא → $V = \text{const}$ → CC מושלם ($w = -1$)
+- $f \sim 0.3\text{--}0.5\, M_{\rm Pl}$: $m_\sigma \sim H_0$ → **quintessence דינמי** → $w \neq -1$
+
+**Analysis 4: Hubble tension:**
+
+| | $\Lambda_d$ (meV) | $H_0$ |
+|---|---|---|
+| Planck | 1.53 | 67.4 |
+| SH0ES | 1.67 | 73.0 |
+| **יחס** | **1.089** | |
+
+הפרש של ~9% ב-$\Lambda_d$ מספיק להסביר את ה-tension.
+
+### שלוש תובנות
+
+**1. $H_0$ הוא פלט, לא קלט.**
+מכניסים 6 פרמטרים מהלגרנז'יאן, מוציאים $H_0$. שרשרת סגורה:
+$$\mathcal{L}_{\rm SIDM} \xrightarrow{\text{Boltzmann}} \Omega_\chi \xrightarrow{\text{+dark QCD}} V(\sigma) \xrightarrow{\text{ODE מצומד}} H_0$$
+
+**2. נדרש $\theta_i \approx \pi$ — hilltop quintessence.**
+כדי לקבל $H_0 \in [67, 73]$, השדה חייב להתחיל **קרוב לפסגה** של הפוטנציאל ($\theta_i \sim 3.0$–$3.1$, ו-$\pi = 3.14$). שם $V(\theta) \approx 2\Lambda_d^4$ (מקסימום), והשדה כמעט לא מתגלגל → האנרגיה נשמרת כ-$\rho_\Lambda$.
+
+**3. $w_\sigma \neq -1$ — חיזוי מדיד!**
+- $\theta_i = 3.0$: $w = -0.86$ — quintessence דינמי
+- $\theta_i = 3.1$: $w = -0.99$ — כמעט CC
+
+זו **תחזית** שניתן למדוד: DESI, Euclid ו-CMB-S4 רגישים ל-$\Delta w \sim 0.05$.
+
+### מה PI-7 הסטטי פספס
+
+PI-7 הניח ש-σ **קפוא** לחלוטין. Layer 8 מראה ש-$m_\sigma \sim 2$–$3 \times H_0$ → השדה **כבר התחיל לנדנד**. זו הנקודה הפיזיקלית: dark energy עובר ממצב slow-roll למצב oscillation *בדיוק עכשיו* ($z \sim 0$–$1$).
+
+### קשר לפיזיקה
+
+- **סקאלת הנויטרינו**: $\Lambda_d \sim 2$ meV $= \sqrt{H_0 M_{\rm Pl}}$ — אותה סקאלה כמו $\Delta m^2_{\rm atm}$
+- **A₄ + dark QCD**: הסימטריה $A_4$ קובעת $\theta_{\rm relic} = 19.47°$, ו-dark QCD נותן $V(\theta) = \Lambda_d^4(1-\cos\theta)$
+- **GMOR**: $m_\sigma = \Lambda_d^2/f$ — אנלוגי לפיון ב-QCD רגיל
+
+### שאלות פתוחות
+
+1. **מה מקבע $\theta_i \approx \pi$?** — האם inflation נותן $\theta_i$ uniform ב-$[0, 2\pi]$ (60% הסתברות ל-$\theta_i > 2$)?
+2. **נתיב 2 (transmutation)**: האם $\Lambda_d$ **נגזר** מ-$\alpha_D$ דרך RG running? אם כן → 5 פרמטרים במקום 6
+3. **Cannibal phase**: ρ_φ(a) taken as zero today — correct since 3φ→2φ annihilated. Validate against Paper 1
+
+### סטטוס: ✅ PASS — H₀ יוצא כפלט. Hilltop quintessence עם w ≠ −1.
+
+---
+
+## Test 24: θ_i = π — Hilltop CP/T-Breaking Quintessence — 28 Mar 2026
+
+**שאלה**: למה דווקא $\theta_i \approx \pi$? האם יש הצדקה פיזיקלית, מעבר לכוונון עדין?
+
+### רקע
+
+Test 23 מצא ש-$H_0 \in [67, 73]$ km/s/Mpc דורש $\theta_i \in [2.9, 3.25]$, כלומר **בסביבת $\pi = 3.1416$**. שני שאלות מיידיות:
+1. למה $\pi$ ולא ערך אקראי אחר?
+2. מה פיזיקלי ב-$\theta = \pi$?
+
+### סריקה מספרית: $\theta_i$ סביב $\pi$ עם $\Lambda_d = 2$ meV
+
+| $\theta_i$ | $\theta_i/\pi$ | $H_0$ (km/s/Mpc) | $w_\sigma$ | $\Omega_{\rm DE}$ | $V/V_{\rm max}$ | $V' \propto \sin\theta$ |
+|---|---|---|---|---|---|---|
+| 2.50 | 0.796 | 47.95 | +0.93 | 0.381 | 0.901 | 0.598 |
+| 2.75 | 0.875 | 59.28 | −0.003 | 0.595 | 0.962 | 0.382 |
+| 2.90 | 0.923 | 67.09 | −0.597 | 0.684 | 0.985 | 0.239 |
+| 2.95 | 0.939 | 69.26 | −0.745 | 0.703 | 0.991 | 0.190 |
+| **3.00** | **0.955** | **71.05** | **−0.860** | **0.718** | **0.995** | **0.141** |
+| **3.05** | **0.971** | **72.36** | **−0.941** | **0.728** | **0.998** | **0.092** |
+| 3.09 | 0.984 | **73.04** | −0.982 | 0.733 | 0.999 | 0.050 |
+| **3.10** | **0.987** | **73.13** | **−0.988** | **0.734** | **1.000** | **0.042** |
+| 3.13 | 0.997 | 73.32 | −0.999 | 0.735 | 1.000 | 0.010 |
+| **π** | **1.000** | **73.33** | **−1.000** | **0.735** | **1.000** | **0.000** |
+
+### תובנה 1: $\theta = \pi$ הוא Hilltop — מקסימום הפוטנציאל
+
+$$V(\theta) = \Lambda_d^4(1 - \cos\theta)$$
+
+- $V(0) = 0$ — מינימום, אין DE
+- $V(\pi) = 2\Lambda_d^4$ — **מקסימום**, DE מרבי
+- $V'(\pi) = 0$ — **שיפוע אפס**, השדה "יושב" על הפסגה
+
+Hubble friction ($3H\dot\sigma$) מונע מהשדה ליפול. כל עוד $H \gg m_\sigma$, הוא קפוא. כש-$H \sim m_\sigma$ (היום!) — מתחיל להתגלגל.
+
+### תובנה 2: CP סימטריה ב-$\theta = \pi$ — תופעת Dashen
+
+הפוטנציאל $V(\theta) = \Lambda_d^4(1-\cos\theta)$ מגיע מהאיבר $\theta_d G\tilde{G}$ ב-dark QCD (אנומלית כיראלית).
+
+תחת CP: $\sigma \to -\sigma$, כלומר $\theta \to -\theta$.
+
+$$V(\theta) = V(-\theta) \quad \forall\theta$$
+
+אבל **שתי ורק שתי** נקודות שבהן גם $V' = 0$ (נקודות CP):
+
+| $\theta$ | $V$ | $V'$ | $V''$ | סיווג |
+|---|---|---|---|---|
+| $0$ | $0$ | $0$ | $> 0$ | מינימום — CP preserved, $\rho_{\rm DE} = 0$ |
+| $\pi$ | $2\Lambda_d^4$ | $0$ | $< 0$ | **מקסימום — CP preserved, $\rho_{\rm DE}$ מרבי** |
+
+$\theta = \pi$ הוא **hilltop CP-symmetric** — הלגרנז'יאן שומר CP, אבל הוואקום **לא יציב**. כל הפרעה (פלוקטואציה קוונטית, inflation) שוברת CP ספונטנית:
+
+$$\theta = \pi \pm \varepsilon \implies V'(\pi \pm \varepsilon) \neq 0 \implies \text{CP broken spontaneously}$$
+
+זו **בדיוק תופעת Dashen** — ידועה מ-QCD ב-$\theta_{\rm QCD} = \pi$.
+
+### תובנה 3: CPT → T-Breaking = Dark Energy
+
+משפט CPT (בכל QFT לורנץ-אינווריאנטית):
+
+$$\text{CP נשברת ספונטנית} \quad \xRightarrow{\text{CPT exact}} \quad \text{T נשברת ספונטנית}$$
+
+השרשרת המלאה:
+
+$$\boxed{\theta_i = \pi \xrightarrow{V''<0} \text{spontaneous CP breaking} \xrightarrow{\text{CPT}} \text{spontaneous T breaking} \xrightarrow{H \gg m_\sigma} \text{frozen } \rho_\sigma = \rho_\Lambda}$$
+
+**אנרגיה אפלה = האנרגיה ש"נעולה" בתצורת T-breaking של הוואקום האפל.**
+
+### תובנה 4: הקפלינגים ב-$\theta = \pi$
+
+$$y_s(\pi) = y\cos\pi = -y, \qquad y_p(\pi) = y\sin\pi = 0$$
+
+ב-$\theta = \pi$ בדיוק: **pure scalar coupling** (עם סימן שלילי). אין רכיב פסאודו-סקלרי → CP שמורה.
+
+ברגע ש-$\theta = \pi - \varepsilon$:
+
+$$y_p = y\sin(\pi - \varepsilon) = y\varepsilon \neq 0$$
+
+**הרכיב T-odd "נדלק"** — וזה DE. ככל ש-$\varepsilon$ גדל (השדה מתגלגל), הרכיב T-odd חזק יותר, ו-$w$ עולה מ-$-1$ לכיוון $-1/3$.
+
+### תובנה 5: הדואליות EM חוזרת
+
+| EM | Dark sector |
+|---|---|
+| $\vec{E}$ (T-even) | $y_s \cos\theta$ — scalar, SIDM |
+| $\vec{B}$ (T-odd) | $y_p \sin\theta$ — pseudo, DE |
+| שדה סטטי $\to B = 0$ | $\theta = \pi \to y_p = 0$, CP preserved |
+| תנועה $\to B \neq 0$ | Rolling $\theta \neq \pi \to y_p \neq 0$, CP broken |
+| $B$ does no work ($\vec{F} \perp \vec{v}$) | pseudo $\propto v^2/c^2$ ($10^{-10}$ ב-NR, Test 15) |
+| אנרגיית שדה מגנטי $B^2/2\mu_0$ | $V(\theta) = \Lambda_d^4(1-\cos\theta)$ = **DE** |
+
+### תובנה 6: Fine-Tuning Assessment
+
+הטווח שנותן $H_0 \in [67, 73]$:
+
+$$\theta_i \in [2.9, 3.25] \quad \Rightarrow \quad \Delta\theta = 0.35 \text{ מתוך } 2\pi = 6.28$$
+
+$$\text{fine-tuning} = \frac{0.35}{6.28} \approx 5.5\%$$
+
+השוואה:
+- Fine-tuning של $\Lambda_{\rm CC}$: $10^{-120}$ — **catastrophic**
+- Fine-tuning של מסת ההיגס: $\sim 1\%$ — **hierarchy problem**
+- Fine-tuning שלנו: $\sim 5\%$ — **סביר לחלוטין**
+
+עם anthropic selection (ביקומים שבהם $\theta_i$ רחוק מ-$\pi$: אין DE מספיק → אין מבנים) — ה-5.5% הופך ל-selection effect.
+
+### תובנה 7: שם הפרויקט **הוא** הפיזיקה
+
+**dark-energy-T-breaking** = אנרגיה אפלה כ-T-breaking קפוא של הוואקום האפל.
+
+- $w \approx -1$: T-breaking קפוא (Hubble friction)
+- $w > -1$: T-breaking מתרגע (השדה מתחיל להתגלגל)
+- $w(z)$ = קצב ההתרגעות — **מדיד ע"י DESI/Euclid/CMB-S4**
+
+**$w \neq -1$ הוא לא סטייה מ-ΛCDM — הוא מדידה ישירה של שבירת T.**
+
+### שאלה פתוחה שנפתרה
+
+| שאלה (מ-T23) | תשובה (T24) |
+|---|---|
+| "מה מקבע $\theta_i \approx \pi$?" | CP סימטריה בפוטנציאל. $\theta = \pi$ הוא CP-fixed point. Dashen mechanism. |
+| "האם inflation נותן $\theta_i$ uniform?" | כן — ותנאי ב-$[2.9, 3.25]$ הוא 5.5% מהמרחב = סביר (ללא או עם anthropic selection) |
+
+### שאלות חדשות
+
+1. **T23 עם $\Lambda_d = 1.53$ meV**: בסריקה עם $\Lambda_d = 2$ meV, $\theta_i = \pi$ נותן $H_0 = 73.3$. עם $\Lambda_d = 1.53$ meV (Planck-matched), מה $\theta_i$ שנותן $H_0 = 67.4$?
+2. **two-parameter scan**: $(\theta_i, \Lambda_d)$ → $H_0$ contour. האם יש degeneracy?
+3. **Inflation dynamics**: האם stochastic inflation ב-dark QCD sector מייצר $\theta_i \approx \pi$ בהסתברות מוגברת (hilltop trapping)?
+4. **DESI data**: $w_0 = -0.45^{+0.34}_{-0.21}$, $w_a = -1.79^{+0.48}_{-1.0}$ (DESI DR1 2024) — האם תואם לטווח שלנו?
+
+### סטטוס
+
+✅ **$\theta_i \approx \pi$ מוצדק פיזיקלית** — CP symmetry (Dashen) + CPT → T-breaking = DE.
+✅ **Fine-tuning סביר** (~5.5%, לא catastrophic).
+✅ **שם הפרויקט = הפיזיקה**: dark energy IS frozen T-breaking.
+✅ **חיזוי בדיק**: $w \neq -1$ $\Leftrightarrow$ T-breaking מתרגע → DESI/Euclid.

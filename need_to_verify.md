@@ -164,11 +164,10 @@ This document lists all claims that require independent verification before this
 
 | | |
 |---|---|
-| **Claim** | After φ → 2σ (dark pions), the total ΔN_eff picks up an extra contribution from σ as dark radiation: ΔN_eff = 0.153 (from χ + φ before decay) + 0.027 (from σ after φ decay) ≈ 0.180 |
-| **What to verify** | (a) Timing: does φ → 2σ happen before or after neutrino decoupling (T ~ 2 MeV)? <br> (b) Exact ΔN_eff from σ: depends on whether σ inherits φ's temperature or thermalizes in dark sector <br> (c) Is ΔN_eff = 0.180 still consistent with Planck (< 0.33)? |
-| **Where** | `dark-energy-T-breaking/` — new script `test22_neff_phi_decay.py` |
-| **How** | 1. Compute τ_φ for φ → 2σ from λ_{φσ} coupling <br> 2. Compare T at φ decay vs T_ν_decouple = 2 MeV <br> 3. Track entropy flow: if φ decays before ν decouple, σ heats ν sector → modifies ΔN_eff <br> 4. Full ΔN_eff formula including σ dof |
-| **Priority** | 🔴 HIGH — closes the BBN tension from Test 20 and finalizes the ΔN_eff prediction |
+| **Claim** | ~~ΔN_eff = 0.153 + 0.027 ≈ 0.180~~ **תוקן**: ΔN_eff ≈ 0 ב-secluded model (χ,φ הם NR ב-BBN). אם σ מתרמלז: 0.214. |
+| **Result** | ✅ **DONE** (28 Mar 2026). הנוסחה הישנה (massless limit) **שגויה**: ספרה d.o.f. ב-$T_D$ אבל ΔN_eff נמדד ב-BBN. Check 4 תוקן עם Boltzmann suppression. |
+| **Where** | `test22_neff_phi_decay.py` + `test_physics_checks.py` (Check 4) |
+| **Priority** | ✅ **RESOLVED** |
 
 ---
 
@@ -188,6 +187,6 @@ This document lists all claims that require independent verification before this
 | 🟡 MEDIUM | Coupled Boltzmann + σ(T) | `Secluded-Majorana-SIDM/` | No |
 | 🟡 MEDIUM | A₄ + neutrino consistency | `dark-energy-T-breaking/` | No |
 | � HIGH | **Test 21: FIMP production** | `dark-energy-T-breaking/` | **Yes — T_D=200 MeV assumption** |
-| 🔴 HIGH | **Test 22: ΔN_eff with φ→2σ** | `dark-energy-T-breaking/` | **Yes — finalizes ΔN_eff prediction** |
+| ✅ DONE | **Test 22: ΔN_eff with φ→2σ** | `dark-energy-T-breaking/` | **Resolved — ΔN_eff ≈ 0 (secluded), 0.214 (if σ thermalizes)** |
 | �🟢 LOW | TBM corrections to θ_dark | `dark-energy-T-breaking/` | No |
 | 🟢 LOW | VPM solver validation | `Secluded-Majorana-SIDM/` | No |

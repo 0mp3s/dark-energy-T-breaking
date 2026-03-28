@@ -1901,3 +1901,115 @@ $$\text{fine-tuning} = \frac{0.35}{6.28} \approx 5.5\%$$
 ✅ **Fine-tuning סביר** (~5.5%, לא catastrophic).
 ✅ **שם הפרויקט = הפיזיקה**: dark energy IS frozen T-breaking.
 ✅ **חיזוי בדיק**: $w \neq -1$ $\Leftrightarrow$ T-breaking מתרגע → DESI/Euclid.
+
+---
+
+## Test 25: Dimensional Transmutation — $\Lambda_d$ from $\alpha_d$ via RG — 28 Mar 2026
+
+### מוטיבציה
+
+Path 2 ממפת ה-7 נתיבים: האם $\Lambda_d = 2$ meV (שהוא קלט ב-Layer 8) **נגזר** מצימוד gauge בסיסי יותר, בדיוק כמו ש-$\Lambda_{QCD} \approx 220$ MeV נגזר מ-$\alpha_s(M_Z) = 0.118$?
+
+**Transmutation ממדי**:
+$$\Lambda_d = \mu \cdot \exp\left(-\frac{2\pi}{b_0\,\alpha_d(\mu)}\right)$$
+
+### מבנה המודל — שני צימודים נפרדים
+
+תובנה קריטית שעלתה מהחישוב:
+
+| צימוד | סימול | ערך | תפקיד |
+|--------|--------|------|--------|
+| **Yukawa** (SIDM) | $\alpha_D = g_D^2/4\pi$ | $3.274 \times 10^{-3}$ | חתך פיזור $\sigma_T(v)$, relic density |
+| **Gauge** (dark QCD) | $\alpha_d = g_d^2/4\pi$ | $\sim 0.031$ (חדש!) | כליאה → $\Lambda_d$ → dark energy |
+
+**אלו צימודים שונים!** בלגרנזיאן:
+- $g_D \bar\chi \phi \chi$ — Yukawa, נכנס ל-SIDM
+- $g_d A_\mu^a \bar\chi T^a \gamma^\mu \chi$ — gauge, אחראי לכליאה
+
+$\alpha_D$ מה-MCMC (**לא** gauge coupling) → transmutation ישירה נותנת $\Lambda_d \sim 10^{-130}$ GeV = אפס.
+
+### תוצאות מספריות
+
+**פרמטרים של SU(2)_d:**
+- $C_2(G) = 2$, $T(R) = 1/2$, $N_f = 3$ Majorana (טריפלט $A_4$: $\chi_1, \chi_2, \chi_3$)
+- $b_0 = \frac{11}{3} \cdot 2 - \frac{2}{3} \cdot \frac{1}{2} \cdot 3 = \frac{19}{3} = 6.333$
+- Asymptotic freedom: כן ($b_0 > 0$, מקסימום $N_f = 22$)
+
+**Analysis 1 — Forward (נכשל):**
+$$\Lambda_d = m_\chi \cdot \exp\left(-\frac{2\pi}{6.333 \times 3.274 \times 10^{-3}}\right) = 98.19 \cdot e^{-303} \approx 10^{-130} \text{ GeV}$$
+$\alpha_D$ (Yukawa) קטן מדי בסדרי גודל.
+
+**Analysis 2 — Inverse (מצליח):**
+$$\alpha_d(m_\chi) = \frac{2\pi}{b_0 \cdot \ln(m_\chi/\Lambda_d)} = \frac{2\pi}{6.333 \cdot 31.52} = 0.0315 \approx \frac{1}{32}$$
+
+**Analysis 3 — RG running של $\alpha_d$ לאורך הסקאלות:**
+
+| סקאלה | $\mu$ [GeV] | $1/\alpha_d$ | $\alpha_d$ |
+|--------|-------------|-------------|-----------|
+| $\Lambda_d$ (2 meV) | $2 \times 10^{-12}$ | → ∞ (כליאה) | nonpert. |
+| $m_\phi$ (9.66 MeV) | $9.66 \times 10^{-3}$ | 22.5 | 0.045 |
+| $m_\chi$ (98 GeV) | 98.2 | 31.8 | 0.031 |
+| TeV | $10^3$ | 34.1 | 0.029 |
+| $M_{GUT}$ ($2 \times 10^{16}$) | $2 \times 10^{16}$ | **65.0** | 0.015 |
+| $M_{Pl}$ ($2.4 \times 10^{18}$) | $2.4 \times 10^{18}$ | **69.8** | 0.014 |
+
+**Analysis 4 — QCD analogy (sanity check):**
+- QCD: $\alpha_s(M_Z) = 0.118$, $b_0 = 23/3$, $\Lambda_{QCD} \approx 87$ MeV (1-loop) vs 220 MeV (exp.) ✓
+- Dark QCD: $\alpha_d(m_\chi) = 0.031$, $b_0 = 19/3$, $\Lambda_d = 2$ meV ✓
+- Coupling קטן יותר → סקאלת כליאה נמוכה יותר — **צפוי** (רגישות אקספוננציאלית)
+
+**Analysis 5 — Unification hint:**
+
+| $1/\alpha_d(M_{GUT})$ | $\alpha_d(m_\chi)$ | $\Lambda_d$ | הערה |
+|---|---|---|---|
+| 30 (= $1/\alpha_2$) | 0.147 | 117 GeV | QCD-like — גדול מדי |
+| 50 | 0.060 | 5.7 MeV | — |
+| **59** (= $1/\alpha_1$) | **0.039** | **760 meV** | קרוב! (×380) |
+| **65** (exact) | **0.031** | **2.0 meV** | ← exact for $\Lambda_d = 2$ meV |
+| 70 | 0.027 | 0.014 meV | — |
+
+**תוצאה מפתיעה**: $1/\alpha_d(M_{GUT}) = 65$ קרוב ל-$1/\alpha_1(M_{GUT}) \approx 59$ (הפרש 10% בלבד). רמז ל-unification?
+
+### סיכום — מה למדנו
+
+1. **$\alpha_D$ (Yukawa) $\neq$ $\alpha_d$ (gauge)** — נתיב 2 חושף פרמטר נסתר
+2. **$\alpha_d(m_\chi) \approx 0.031 \approx 1/32$** — ערך טבעי, פרטורבטיבי, אנלוגי ל-$\alpha_s$
+3. **ספירת פרמטרים**: $\{f, \Lambda_d, \theta_i\} \to \{f, \alpha_d, \theta_i\}$ — אותו מספר, אבל $\alpha_d$ **יסודי יותר**
+4. **$1/\alpha_d(M_{GUT}) \approx 65$** — בטווח הצימודים של ה-SM ב-GUT ($1/\alpha_1 \approx 59$, $1/\alpha_2 \approx 30$)
+5. **$\Lambda_d$ כבר לא "מושם ביד"** — הוא **נגזר** מכליאה ב-dark QCD, כמו $\Lambda_{QCD}$
+
+### לגרנזיאן מעודכן — 7 פרמטרים
+
+$$\mathcal{L} = \bar\chi(i\!\not\!\!D - m_\chi)\chi - g_D\phi\bar\chi\chi + \frac{1}{2}(\partial\phi)^2 - \frac{1}{2}m_\phi^2\phi^2 - \frac{1}{4}G_{d,\mu\nu}^a G_d^{a\mu\nu}$$
+
+פרמטרים: $\{m_\chi, m_\phi, \alpha_D, \alpha_d, f, \theta_i\}$ + $\theta_{A_4}$ (קבוע מ-$A_4$)
+
+| פרמטר | ערך | מקור |
+|---------|------|------|
+| $m_\chi$ | 98.19 GeV | MCMC (Layer 7) |
+| $m_\phi$ | 9.66 MeV | MCMC (Layer 7) |
+| $\alpha_D$ | $3.274 \times 10^{-3}$ | MCMC (Layer 7) |
+| $\alpha_d$ | $\approx 0.031$ | **חדש** — gauge coupling → $\Lambda_d$ |
+| $f$ | $0.27 M_{Pl}$ | dark chiral scale |
+| $\theta_i$ | $\sim\pi$ | CP/Dashen (Test 24) |
+
+**נגזרים**:
+- $\Lambda_d = m_\chi \cdot e^{-2\pi/(b_0 \alpha_d)} = 2$ meV
+- $m_\sigma = \Lambda_d^2/f = 6.1 \times 10^{-42}$ GeV → $m_\sigma/H_0 \approx 4.2$
+- $\rho_\Lambda = \Lambda_d^4(1-\cos\theta_i) \approx 2\Lambda_d^4$
+- $H_0 \approx 67$–$73$ km/s/Mpc (from ODE)
+
+### שאלות פתוחות
+
+1. **Unification**: האם $\alpha_d$ מתאחד עם $\alpha_1$ (או צימוד SM אחר) ב-$M_{GUT}$? הפרש של 10% ב-$1/\alpha$ — threshold corrections?
+2. **$f$ מ-first principles**: $f \sim 0.27M_{Pl}$ — נגזר מ-dark chiral symmetry breaking? $f \sim 4\pi F_\pi^{dark}$?
+3. **ייצוב**: $\alpha_d \approx 1/32$ לא נכנס לאף אילוץ SIDM (כי ה-Yukawa $\alpha_D$ הוא שנמדד) — לאמת שאין אילוצים מ-BBN, CMB
+4. **2-loop effects**: תיקוני 2-loop ל-$b_0$ יכולים לשנות את $\Lambda_d$ בסדר גודל — צריך בדיקה
+
+### סטטוס
+
+✅ **Path 2 (transmutation) עובד** — $\Lambda_d$ נגזר מ-$\alpha_d$ בדיוק כמו $\Lambda_{QCD}$ מ-$\alpha_s$
+✅ **תובנה מבנית**: מודל SIDM מחייב **שני** צימודים — Yukawa + gauge
+✅ **ערך טבעי**: $\alpha_d \approx 1/32$ — לא fine-tuned, פרטורבטיבי
+⚠️ **ספירת פרמטרים לא ירדה** — $\Lambda_d$ הוחלף ב-$\alpha_d$, לא נעלם
+🔶 **Unification hint**: $1/\alpha_d(M_{GUT}) \approx 65 \approx 1/\alpha_1$ — דורש חקירה

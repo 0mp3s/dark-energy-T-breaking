@@ -2195,3 +2195,83 @@ $$\theta_i < \pi \quad \Rightarrow \quad \theta_i \approx 2.9$$
 ✅ **DESI שובר degeneracy** — $\theta_i < \pi$ if $w_0 > -1$
 ✅ **Planck+DESI**: $(\theta_i, \Lambda_d) = (2.92, 2.0 \text{ meV})$ — best fit both
 📊 **SH0ES דורש $\Lambda_d = 2.1$ meV**: shift קטן (5%) בסקאלת הכליאה
+
+---
+
+## Test 29: f from First Principles — Cosmological Self-Consistency — 28 Mar 2026
+
+### שאלה
+
+$f \approx 0.27\,M_\text{Pl}$ — האם זה פרמטר חופשי או נגזרת?
+
+### הטיעון האנליטי
+
+שלוש משוואות:
+1. **פרידמן**: $\Lambda_d^2 = \sqrt{3\Omega_\text{DE}} \cdot H_0 \cdot M_\text{Pl} / \sqrt{1 - \cos\theta_i}$
+2. **GMOR**: $m_\sigma = \Lambda_d^2 / f$
+3. **קווינטסנס**: $m_\sigma = c \cdot H_0$ ($c \sim \text{O(few)}$)
+
+$$\boxed{f = \frac{\sqrt{3\,\Omega_\text{DE}}}{\,c\,\sqrt{1-\cos\theta_i\,}} \cdot M_\text{Pl}}$$
+
+לא תלוי ב-$\Lambda_d$ או $H_0$ **בנפרד** — רק ב-$\{\Omega_\text{DE}, \theta_i, c\}$.
+
+### שני משטרים
+
+| משטר | $\theta_i$ | f | סטטוס |
+|------|-----------|---|--------|
+| **Hilltop** ($\theta_i = \pi$) | $\pi$ | **לא מוגבל** — שדה קפוא ב-$dV/d\sigma = 0$, כל $f$ נותן אותו $H_0$ | CC טהור |
+| **קווינטסנס** ($\theta_i < \pi$) | $< \pi$ | **נגזר** — $f$ ייחודי שנותן $H_0$ נצפה עם $w_0 > -1$ | DESI |
+
+### f-scan מספרי (θ_i = 3.0, Λ_d = 1.89 meV)
+
+| $f/M_\text{Pl}$ | $m_\sigma/H_0$ | $H_0$ | $w_\sigma$ | הערה |
+|---|---|---|---|---|
+| 0.10 | 10.2 | 57.6 | −0.33 | שדה כבר התנדנד |
+| **0.15** | **6.8** | **67.7** | **+0.16** | **≈ Planck!** |
+| 0.20 | 5.1 | 74.1 | −0.83 | שדה שקע לקרוב ל-CC |
+| 0.27 | 3.8 | 75.3 | −0.97 | כמעט CC |
+| 0.50 | 2.0 | 75.6 | −1.00 | CC |
+
+**תובנה מפתיעה**: ל-$\theta_i = 3.0$ עם Planck $H_0$, צריך $f \approx 0.15\,M_\text{Pl}$, לא 0.27!
+הערך 0.27 מתאים ל-$\theta_i$ קרוב ל-$\pi$ (CC הכמעט-טהור).
+
+### c(θ_i) דינמי
+
+| $\theta_i$ | $f^*/M_\text{Pl}$ | $c = m_\sigma/H_0$ | $w_0$ |
+|---|---|---|---|
+| $\pi$ | $\text{deg.}$ | — | $-1.00$ |
+| 3.10 | 0.113 | 9.0 | +0.55 |
+| 3.00 | 0.149 | 6.8 | +0.20 |
+| 2.95 | 0.162 | 6.3 | +0.11 |
+| 2.90 | 0.175 | 5.8 | +0.01 |
+| 2.887 | 0.178 | 5.7 | +0.01 |
+
+$c$ יורד מ-$\sim 9$ ל-$\sim 5.7$ ככל ש-$\theta_i$ מתרחק מ-$\pi$.
+
+### אנלוגיה ל-QCD Axion
+
+$$\frac{f}{\Lambda_d} \sim 3 \times 10^{29} \quad\text{vs}\quad \frac{f_a}{\Lambda_\text{QCD}} \sim 10^{10\text{--}13}$$
+
+σ הוא **Dark Axion** — לא dark pion! f מוגדר על ידי שבירת סימטריה גלובלית ב-UV,
+לא על ידי קונדנסט כיראלי ב-IR.
+$V = \Lambda_d^4(1-\cos(\sigma/f))$ מאינסטנטונים של dark SU(2), בדיוק כמו QCD axion.
+
+### WGC
+
+$S_\text{inst} \cdot f \leq M_\text{Pl}$: ב-IR (coupling חזק), $S_\text{inst} \sim O(1)$
+→ $f \leq M_\text{Pl}$ ✓ ($f = 0.17\text{--}0.27\,M_\text{Pl}$)
+
+### צמצום פרמטרים
+
+| לפני | אחרי |
+|-------|------|
+| $\{f, \Lambda_d, \theta_i\}$ = 3 | $\{\Lambda_d, \theta_i\}$ = 2 (f נגזר) |
+| **סה"כ UV**: $\{m_\chi, m_\phi, \alpha_D, \alpha_d, \theta_i\}$ = 5 | אחרי Paper 1: $\{\alpha_d, \theta_i\}$ = **2 חופשיים** |
+
+### סטטוס
+
+✅ **f ~ M_Pl מטיעון עקביות** — לא fine-tuning
+✅ **DESI שובר degeneracy**: אם $w_0 > -1$ אז $\theta_i < \pi$ ו-$f$ נגזר
+✅ **WGC: f < M_Pl** — מסופק
+⚠️ **f = 0.27 M_Pl** ← תלוי ב-$\theta_i$; ל-DESI $\theta_i \sim 2.9$: $f \approx 0.17\,M_\text{Pl}$
+📊 **מודל עם 2 פרמטרים חופשיים**: $\alpha_d$ ו-$\theta_i$ — predictive!

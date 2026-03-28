@@ -40,7 +40,7 @@ M_PHI_GEV   = 9.66e-3            # GeV
 ALPHA_D     = 3.274e-3
 THETA_I     = 3.0                # rad (near-hilltop)
 F_DEFAULT   = 0.27 * M_PL       # GeV
-LAMBDA_D    = 2.0e-15            # GeV (2 meV)
+LAMBDA_D    = 2.0e-12            # GeV (2 meV)
 
 
 def print_header(title):

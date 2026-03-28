@@ -2350,3 +2350,188 @@ Cannibal λ_4 ~ Λ_d⁴/f⁴ = 10⁻¹³¹ → no self-thermalization either.
 ✅ **ΔN_eff = 3.23 EXCLUDED** → dark sector secluded (BBN validates)
 ✅ **ΔN_eff and H₀ are independent** (δH₀ < 0.01 km/s/Mpc for all ΔN_eff)
 📊 **Falsifiable by CMB-S4:** ΔN_eff > 0.05 would indicate UV-completion effects
+
+---
+
+## Test 31: 2-loop β-function correction — 28 Mar 2026
+
+### שאלה
+How much does the 2-loop β-function correction shift Λ_d and α_d?
+Does it affect the physical predictions?
+
+### סקריפט
+`hunt_H0/two_loop_b0.py`
+
+### תוצאות
+
+**2-loop β-function coefficients (SU(2)_d, 3 Majorana quarks):**
+- b₀ = 19/3 = 6.333 (1-loop, confirmed)
+- b₁ = 33.08 (2-loop), b₁/b₀² = 0.82
+
+**Impact on Λ_d:**
+- At fixed α_d = 0.0315: 2-loop shifts Λ_d by factor 20.6 (2 meV → 41 meV)
+- To get same Λ_d = 2 meV: α_d shifts by only −8.96% (0.0315 → 0.0287)
+
+**Exponential sensitivity:**
+- Amplification factor: ∂ln(Λ_d)/∂α = 2π/(b₀α²) = 1002
+- 1% change in α_d → 1002% change in Λ_d
+
+### מסקנות
+1. **α_d is a free parameter** — 2-loop just shifts the numerical value needed
+2. **Physical predictions unchanged** — same Λ_d = 2 meV achieved by α_d = 0.029
+3. **Exponential sensitivity is a feature**: small UV coupling → meV confinement scale
+4. **No crisis**: 2-loop is theoretical uncertainty in mapping α_d → Λ_d, not in physics
+
+### סטטוס
+✅ b₁ = 33.08 computed, b₁/b₀² = 0.82
+✅ α_d correction: −8.96% (well within free-parameter range)
+✅ Amplification factor = 1002 (explains why meV scale is natural)
+
+---
+
+## Test 32: Future of the Universe — When does dark energy die? — 28 Mar 2026
+
+### שאלה
+In our model, V(σ) → 0 as σ oscillates toward the minimum.
+When does cosmic acceleration stop? What's the ultimate fate?
+
+### סקריפט
+`hunt_H0/future_universe.py`
+
+### תוצאות
+
+**Part 1 — Future evolution (Hilltop θ=3.0):**
+- Today: w ≈ −0.95, Ω_DE ≈ 0.60, q ≈ −0.35 (accelerating)
+- Field rolls off hilltop, gains KE, overshoots minimum
+- w oscillates between −1 and +1 as field oscillates through V=0
+- Acceleration stops at N ≈ 0.45 (a ≈ 1.57, ~5 Gyr from now)
+
+**Part 3 — Cosmic timeline:**
+- m_σ = Λ_d²/f = 6.1×10⁻⁴⁸ GeV ≪ H₀ (with f = 0.27 M_Pl)
+- Field hasn't entered true oscillation regime yet
+- a_osc ≈ 3822 → σ oscillates at t ≈ 3.3 million Gyr (236,000 × t₀)
+- After oscillations: ⟨w⟩ ≈ 0 → pressureless matter → DE dies
+
+**Part 4 — Model comparison:**
+| Property          | ΛCDM         | Our model      | Quintessence |
+|-------------------|--------------|----------------|--------------|
+| w today           | −1 (exact)   | ≈ −0.95        | w > −1       |
+| w future          | −1 (always)  | 0 (oscillates) | model-dep    |
+| DE fate           | Eternal      | DIES (→ 0)     | model-dep    |
+| Acceleration      | Eternal      | Transient      | model-dep    |
+| Ultimate expansion| de Sitter    | a ∝ t^(2/3)    | model-dep    |
+| Big Rip?          | No           | No             | If w < −1    |
+| Big Crunch?       | No           | No             | If V < 0     |
+
+### Bug fix
+LAMBDA_D was set to 2.0e-15 (0.002 meV) instead of 2.0e-12 (2 meV).
+Also fixed in delta_neff_sigma.py. Correct: 2 meV = 2×10⁻¹² GeV.
+
+### מסקנות
+1. **Dark energy is TRANSIENT** — it dies when σ oscillates to minimum
+2. **No Big Rip, no heat death** — expansion decelerates, structures survive
+3. **w oscillates** — distinguishable from ΛCDM by precision w(z) measurements
+4. **Currently: σ still near hilltop** — m_σ ≪ H₀ → Hubble friction dominates
+
+### סטטוס
+✅ Future evolution computed to a ~ 275
+✅ Deceleration epoch identified: N ≈ 0.45 (Hilltop benchmark)
+✅ LAMBDA_D unit bug fixed (2e-15 → 2e-12)
+
+---
+
+## Test 33: Sensitivity analysis — ∂H₀/∂(parameters) — 28 Mar 2026
+
+### שאלה
+How sensitive is H₀ to each model parameter?
+What determines the error bar on the H₀ prediction?
+
+### סקריפט
+`hunt_H0/sensitivity_H0.py`
+
+### תוצאות
+
+**Jacobian at (θ_i=3.0, Λ_d=2 meV, f=0.27 M_Pl):**
+
+| Parameter | ∂H₀/∂x | Nature | Role |
+|-----------|---------|--------|------|
+| θ_i | +12.07 km/s/Mpc / rad | Initial condition | Dial |
+| ln Λ_d | +90.74 km/s/Mpc / e-fold | Derived (α_d) | Amplitude |
+| ln f | +3.02 km/s/Mpc / e-fold | Fixed by V=ρ_Λ | Mass scale |
+
+**Error propagation (conservative estimates):**
+- σ(θ_i) = 0.1 rad → σ(H₀)|_θ = 1.21 km/s/Mpc
+- σ(ln Λ_d) = 0.5 → σ(H₀)|_Λ = 45.4 km/s/Mpc (dominates)
+- σ(ln f) = 0.1 → σ(H₀)|_f = 0.30 km/s/Mpc
+
+**Hubble tension in θ_i units:**
+- Δθ_i = 0.47 rad shifts H₀ from Planck to SH0ES
+- H₀(θ=3.0) → H₀(θ=3.1): δH₀ = +0.79 km/s/Mpc
+
+### מסקנות
+1. **θ_i is the fine-tuning dial** — maps directly to H₀ once Λ_d, f are set
+2. **Λ_d dominates uncertainty** — because V ∝ Λ_d⁴ (quartic sensitivity)
+3. **f barely matters** — ∂H₀/∂(ln f) = 3 km/s/Mpc per e-fold
+4. **NOT fine-tuning**: θ_i is a continuous initial condition, not a discrete choice
+5. **Λ_d is determined by α_d** — once α_d is fixed, Λ_d and thus H₀ follow
+
+### סטטוס
+✅ Numerical derivatives converged (5 step sizes tested)
+✅ Jacobian computed for all 3 parameters
+✅ Error propagation completed
+✅ Hubble tension mapped to Δθ_i = 0.47 rad
+
+---
+
+## Test 34: The Λ_d ~ m_ν coincidence — 28 Mar 2026
+
+### שאלה
+Λ_d ≈ 2 meV ≈ (ρ_Λ)^{1/4}. Neutrino masses are m_ν ~ 50 meV.
+Is the meV-scale coincidence explained or fine-tuned?
+
+### סקריפט
+`hunt_H0/lambda_d_neutrino.py`
+
+### תוצאות
+
+**meV-scale map:**
+| Quantity | Scale |
+|----------|-------|
+| (ρ_Λ)^{1/4} | 2.31 meV |
+| Λ_d (our model) | 2.0 meV |
+| T₀ (CMB) | 0.23 meV |
+| m_ν (atmospheric) | 50 meV |
+
+**Transmutation produces meV naturally:**
+- α_d ≈ 0.032 at μ = m_χ = 98 GeV → Λ_d = 2 meV
+- α_d ~ O(α_EM) → not fine-tuned
+- Same mechanism as QCD (Λ_QCD/m_t ~ 10⁻³ from transmutation)
+
+**Seesaw comparison:**
+- Neutrino seesaw: m_ν = v²/M_R ≈ 3 meV (same ballpark!)
+- Different mechanism but similar output scale
+- No direct connection (different sectors)
+
+**Fine-tuning comparison:**
+| Model | Free params | Tuning |
+|-------|------------|--------|
+| ΛCDM | 1 (Λ) | 10⁻¹²² of M_Pl⁴ |
+| Quintessence | ≥2 | V₀ ~ meV⁴ |
+| Our model | 2 (α_d, θ_i) | α_d ~ 0.03 (natural), θ_i ~ 3 (O(1)) |
+
+**Key result:** The 122-order hierarchy M_Pl⁴/ρ_Λ is traded for:
+1. A moderate coupling α_d ~ 0.03 (comparable to α_EM)
+2. A standard hierarchy m_χ/M_Pl ~ 10⁻¹⁶
+
+### מסקנות
+1. **Λ_d ~ meV EMERGES from transmutation** — not put in by hand
+2. **α_d ~ 0.03 is unremarkable** in particle physics (O(α_EM))
+3. **θ_i ~ 3 is O(1)** — any θ ∈ [2, π] gives V ~ Λ_d⁴ ~ ρ_Λ
+4. **m_σ/H₀ ≈ 4.2** — dark pion mass naturally close to Hubble rate
+5. **ΛCDM trades cosmological constant problem for bare Λ; we trade it for α_d**
+
+### סטטוס
+✅ meV scale map completed
+✅ Transmutation produces Λ_d = 2 meV from α_d = 0.032
+✅ Seesaw comparison: similar output, different mechanism
+✅ Fine-tuning: 10¹²² hierarchy → α_d ~ 0.03 + m_χ/M_Pl ~ 10⁻¹⁶

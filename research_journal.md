@@ -2013,3 +2013,185 @@ $$\mathcal{L} = \bar\chi(i\!\not\!\!D - m_\chi)\chi - g_D\phi\bar\chi\chi + \fra
 ✅ **ערך טבעי**: $\alpha_d \approx 1/32$ — לא fine-tuned, פרטורבטיבי
 ⚠️ **ספירת פרמטרים לא ירדה** — $\Lambda_d$ הוחלף ב-$\alpha_d$, לא נעלם
 🔶 **Unification hint**: $1/\alpha_d(M_{GUT}) \approx 65 \approx 1/\alpha_1$ — דורש חקירה
+
+---
+
+## Test 26: Gauge Coupling Unification — $\alpha_d \leftrightarrow \alpha_1$ — 28 Mar 2026
+
+### מוטיבציה
+
+Test 25 מצא $1/\alpha_d(M_{GUT}) \approx 65$. בדיקה: האם $\alpha_d$ מתאחד עם צימוד SM ב-$M_{GUT}$? אם כן → $\alpha_d$ נגזר → $\Lambda_d$ נגזר → פרמטר חופשי נעלם.
+
+### תוצאות מספריות
+
+**SM at $M_Z$ (GUT normalization):**
+| צימוד | $1/\alpha(M_Z)$ | $1/\alpha(M_{GUT})$ | $b_i$ |
+|--------|--|--|--|
+| $\alpha_1$ (U(1)_Y) | 59.0 | **37.5** | $-41/10$ (NOT AF) |
+| $\alpha_2$ (SU(2)_L) | 29.6 | 46.2 | $19/6$ (AF) |
+| $\alpha_3$ (SU(3)_c) | 8.5 | 45.3 | $7$ (AF) |
+| **$\alpha_d$ (SU(2)_d)** | **31.8** | **65.0** | **$19/3$** (AF) |
+
+**הפער**: $\Delta(1/\alpha) = 65.0 - 37.5 = 27.5$ ← **גדול מדי** ל-threshold corrections רגילים (שהם $O(3-8)$).
+
+⚠️ **תיקון ל-Test 25**: הערך $1/\alpha_1 \approx 59$ הוא ב-$M_Z$, **לא** ב-$M_{GUT}$! U(1)_Y אינו AF — הצימוד **גדל** עם האנרגיה, אז $1/\alpha_1$ **יורד** ל-37.5 ב-$M_{GUT}$.
+
+### תובנה חדשה — חציית צימודים ב-140 TeV
+
+$\alpha_d(\mu) = \alpha_1(\mu)$ בדיוק ב-$\mu \approx 140$ TeV!
+
+| סקאלה | $\alpha_{cross}$ | משמעות |
+|--------|---|---|
+| $\mu_{cross} = 1.4 \times 10^5$ GeV | $1/54.2$ | FCC-hh regime! |
+
+אבל transmutation מ-$\alpha_{cross}$:
+- $\alpha_d(m_\chi) = 0.021$ (1/47) ← צריך 0.031 (1/32)
+- $\Lambda_d \sim 10^{-19}$ GeV ← לא מספיק
+
+**מסקנה**: חציה מעניינת, אבל **לא** נותנת את $\Lambda_d = 2$ meV הנדרש.
+
+### סיכום — מצב ה-unification
+
+| תרחיש | $\Delta(1/\alpha)$ | $\Lambda_d$ | סטטוס |
+|--------|---|---|---|
+| $\alpha_d = \alpha_1$ ב-$M_{GUT}$ | 27.5 | $\sim 1$ GeV | ❌ פער גדול מדי |
+| $\alpha_d = \alpha_1$ ב-140 TeV | 0 (בדיוק) | $10^{-19}$ GeV | ❌ $\Lambda_d$ קטן מדי |
+| $\alpha_d = \alpha_2$ ב-$M_{GUT}$ | 18.8 | — | ❌ |
+| Threshold $\Delta_{th} \approx 28$ | 0 | 2 meV | ⚠️ אפשרי אבל לא טבעי |
+
+### לקח
+
+1. **Unification ישיר לא עובד** — הפער $\Delta(1/\alpha) \approx 28$ גדול מדי
+2. **$\alpha_d \approx 1/32$ נשאר פרמטר חופשי** — לא ניתן לגזור אותו מ-SM
+3. **אבל**: הוא עדיין **יסודי יותר** מ-$\Lambda_d$ (gauge coupling vs. confinement scale)
+4. **חציית 140 TeV**: מעניינת כ-"numerology" — שתי קבוצות SU(2) עם אותו צימוד בסקאלת FCC
+
+### סטטוס
+
+❌ **Unification ישיר לא עובד** — הפער ב-$M_{GUT}$ גדול מדי (27.5)
+✅ **תיקון לטעות ב-Test 25**: $1/\alpha_1(M_{GUT}) = 37.5$, **לא** 59
+⭐ **חציית 140 TeV**: $\alpha_d = \alpha_1$ — צריך GUT model ספציפי לנצל
+📊 **ספירת פרמטרים**: עדיין 3 חופשיים — $\{f, \alpha_d, \theta_i\}$
+
+---
+
+## Test 27: DESI DR1 Comparison — $w_0, w_a$ from Layer 8 — 28 Mar 2026
+
+### מוטיבציה
+
+DESI DR1 (2024, arXiv:2404.03002) מצא רמז ל-$w_0 > -1$ (quintessence-like dark energy):
+- **DESI+CMB+PantheonPlus**: $w_0 = -0.727 \pm 0.067$, $w_a = -1.05^{+0.31}_{-0.27}$
+- **ΛCDM**: $w_0 = -1$, $w_a = 0$
+
+האם המודל שלנו מתאים?
+
+### שיטה
+
+1. הרצת Layer 8 ODE עבור טווח $\theta_i$
+2. חילוץ $w(a) = P_\sigma/\rho_\sigma$ מהפתרון הצפוף
+3. התאמת CPL: $w(a) = w_0 + w_a(1-a)$ ב-$z < 2$
+4. השוואה עם DESI contours
+
+### תוצאות — טבלה ראשית
+
+| $\theta_i$ | $\theta_i/\pi$ | $H_0$ | $w_0$ (CPL) | $w_a$ (CPL) | $\Omega_{DE}$ | DESI 2σ? |
+|---|---|---|---|---|---|---|
+| 2.80 | 0.891 | 62.0 | −0.520 | −0.865 | 0.629 | ✗ |
+| 2.85 | 0.907 | 64.6 | −0.626 | −0.647 | 0.659 | ✗ |
+| **2.887** | **0.919** | **66.5** | **−0.727** | **−0.493** | **0.678** | **✓ exact $w_0$!** |
+| 2.90 | 0.923 | 67.1 | −0.754 | −0.443 | 0.684 | ✓ |
+| 2.92 | 0.930 | 68.0 | −0.793 | −0.374 | 0.693 | ✓ (−1σ) |
+| 2.95 | 0.939 | 69.3 | −0.844 | −0.281 | 0.706 | ✗ |
+| 3.00 | 0.955 | 71.1 | −0.915 | −0.154 | 0.718 | ✗ |
+| 3.09 | 0.984 | 73.0 | −0.989 | −0.021 | 0.733 | ✗ |
+| $\pi$ | 1.000 | 73.3 | −1.000 | 0.000 | 0.735 | ✗ |
+
+### נקודת ההתאמה המדויקת ל-DESI
+
+$$\boxed{\theta_i = 2.887 \text{ rad} = 0.919\pi}$$
+
+נותנת:
+- $w_0 = -0.727$ — **בדיוק** הערך המרכזי של DESI!
+- $w_a = -0.493$ — בתוך 1.8σ מ-DESI ($-1.05$)
+- $H_0 = 66.5$ km/s/Mpc — קרוב ל-Planck (67.4), פער של 0.95 בלבד
+- $\Omega_{DE} = 0.678$
+
+### DESI 2σ band במרחב $\theta_i$
+
+| $w_0$ | $\sigma$ | $\theta_i$ | $H_0$ |
+|---|---|---|---|
+| $-0.794$ | $-1\sigma$ | 2.921 | 68.0 |
+| $-0.727$ | central | 2.887 | 66.5 |
+| $-0.660$ | $+1\sigma$ | 2.856 | 64.9 |
+| $-0.593$ | $+2\sigma$ | 2.828 | 63.5 |
+
+→ **DESI 2σ band**: $\theta_i \in [2.83, 2.93]$, $H_0 \in [63.5, 68.0]$
+
+### תובנות מרכזיות
+
+1. **המודל מנבא $w_0 > -1$ באופן טבעי**: כל $\theta_i < \pi$ נותן quintessence ($w > -1$) כי $V'(\sigma) \neq 0$ → rolling → אנרגיה קינטית
+2. **רק $\theta_i = \pi$ (hilltop) נותן $w = -1$ בדיוק** — CC as special case
+3. **מתח $H_0$ ↔ $w_0$**: DESI רוצה $w_0 \approx -0.73$ → $\theta_i \approx 2.89$ → $H_0 \approx 66.5$ (Planck). SH0ES רוצה $H_0 \approx 73$ → $\theta_i \approx \pi$ → $w_0 \approx -1$ (ΛCDM). **מתח האבל ממפה על מתח $w_0$**.
+4. **$w_a$ שלנו (−0.49) חלש מ-DESI (−1.05)**: כי השדה σ כמעט קפוא (Hubble friction) → $w(z)$ משתנה לאט. פער של 1.8σ — לא דרמטי.
+5. **$w(z)$ מונוטוני**: $w$ מתקרב ל-−1 ככל ש-$z$ גדל (השדה היה יותר קפוא בעבר). זה **עקבי** עם DESI שמוצא $w_a < 0$.
+
+### חיזויים בדיקים
+
+| חיזוי | ערך | בדיקה ע"י |
+|--------|------|-----------|
+| $w_0 \in [-0.86, -0.52]$ | תלוי ב-$\theta_i$ | DESI DR2 (2025) |
+| $w_a \in [-0.87, -0.15]$ | תמיד שלילי | DESI DR2 + Euclid |
+| $w(z) \to -1$ ב-$z \gg 1$ | מונוטוני | CMB lensing |
+| $H_0 = 66$–$68$ (DESI match) | vs 73.3 (SH0ES match) | Tip of Red Giant Branch |
+
+### סטטוס
+
+✅ **$w_0$ matches DESI** — הערך המרכזי $-0.727$ מתקבל ב-$\theta_i = 2.887$
+✅ **Quintessence טבעי** — כל $\theta_i \neq \pi$ נותן $w > -1$ אוטומטית
+✅ **$w_a < 0$ always** — עקבי עם DESI (T-breaking מתרגע → $w \to -1$)
+⚠️ **$w_a$ חלש מדי** — $-0.49$ vs DESI $-1.05$ (פער 1.8σ)
+⚠️ **H₀ tension persists** — DESI match → $H_0 \approx 66.5$ (Planck), not SH0ES
+
+---
+
+## Test 28: 2D Scan ($\theta_i$, $\Lambda_d$) → $H_0$ Contour Map — 28 Mar 2026
+
+### סריקה דו-ממדית
+
+מרחב הפרמטרים ($\theta_i$, $\Lambda_d$) ממופה ל-$H_0$ ו-$w_0$.
+
+**ארבע נקודות benchmark** — חציית contours של $H_0$ ו-$w_0$:
+
+| Benchmark | $\theta_i$ | $\theta_i/\pi$ | $\Lambda_d$ [meV] | $H_0$ | $w_0$ (CPL) | $w_a$ (CPL) | $\Omega_{DE}$ |
+|---|---|---|---|---|---|---|---|
+| **Planck + DESI** | 2.920 | 0.930 | 2.0 | **68.0** | **−0.793** | −0.374 | 0.692 |
+| **SH0ES + DESI** | 2.960 | 0.942 | 2.1 | **73.3** | **−0.800** | −0.363 | 0.735 |
+| Planck + ΛCDM | $\pi$ | 1.000 | 1.9 | 68.2 | −1.000 | 0.000 | 0.693 |
+| SH0ES + ΛCDM | $\pi$ | 1.000 | 2.0 | 73.3 | −1.000 | 0.000 | 0.735 |
+
+### מבנה מרחב הפרמטרים
+
+$$H_0 \sim 40\text{--}70+ \text{ for } (\theta_i, \Lambda_d) \in [2.5, \pi] \times [0.5, 5] \text{ meV}$$
+
+**Degeneracy**: contour $H_0 = 67.4$ עובר דרך:
+- ($\theta_i \approx 2.90$, $\Lambda_d = 2.0$): quintessence, $w_0 \approx -0.75$
+- ($\theta_i = \pi$, $\Lambda_d = 1.9$): CC, $w_0 = -1$
+
+**DESI שובר את ה-degeneracy!** אם $w_0 > -1$ (כמו שDESI מצא), אז:
+$$\theta_i < \pi \quad \Rightarrow \quad \theta_i \approx 2.9$$
+
+### תובנה מרכזית
+
+המודל מתנהג כ-**interpolation** בין שני גבולות:
+
+| גבול | $\theta_i$ | $w_0$ | $H_0$ (Λ_d=2 meV) | פיזיקה |
+|-------|-----------|-------|-----|---------|
+| **Hilltop** | $\pi$ | $-1$ | 73.3 | CC (T-breaking מוקפא) |
+| **DESI** | $\sim 2.9$ | $\sim -0.75$ | $\sim 67$ | Quintessence (T-breaking מתרגע) |
+
+### סטטוס
+
+✅ **2D scan מושלם** — 4 benchmark points identified
+✅ **DESI שובר degeneracy** — $\theta_i < \pi$ if $w_0 > -1$
+✅ **Planck+DESI**: $(\theta_i, \Lambda_d) = (2.92, 2.0 \text{ meV})$ — best fit both
+📊 **SH0ES דורש $\Lambda_d = 2.1$ meV**: shift קטן (5%) בסקאלת הכליאה

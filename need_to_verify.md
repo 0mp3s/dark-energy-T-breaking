@@ -180,6 +180,7 @@ This document lists all claims that require independent verification before this
 | ✅ DONE | VEV alignment stability | `vev_alignment_stability.py` | Resolved — (1,1,1)×(1,0,0) stable with κ₁-only cross-coupling |
 | ✅ DONE | **M4: sin²θ gap (1/10 vs 1/9)** | `hunt_H0/M4_vev_gap_naturalness.py` | Resolved — 6.07% VEV split = λ_s/λ_p=9/8 (12.5% anisotropy), fully natural |
 | ✅ DONE | **M5: Fifth force screening** | `hunt_H0/M5_chameleon_bounds.py` | Resolved — pseudo-NGB shift symmetry: β=0 tree-level, all bounds ×10³ margin |
+| ✅ DONE | **C2+C2b: DESI tension (H₀, wₐ)** | `hunt_H0/C2b_fine_scan.py` + `hunt_H0/C2b_neutrino_sidm.py` | Golden corridor: θᵢ∈[2.98,3.08], f∈[0.18,0.23]M_Pl → H₀=66.1-66.7, wₐ=-0.67 to -0.60 ✅; Ω_DE=0.675 ✅; Σmν=60.47 meV ✅; SIDM f-independent ✅ |
 | 🟡 MEDIUM | Coupled Boltzmann + σ(T) | `Secluded-Majorana-SIDM/` | No |
 | 🟡 MEDIUM | A₄ + neutrino consistency | `dark-energy-T-breaking/` | No |
 | ⚠️ OPEN | **C1: FIMP/freeze-out production** | `dark-energy-T-breaking/test21_fimp_production.py` | T_D=200 MeV valid assumption; need Sommerfeld Boltzmann for Ωh² |

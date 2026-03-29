@@ -1,0 +1,13 @@
+task,status,script,key_result,notes
+G8_numerical,DONE,G8_Ld_mnu_coincidence.py + G8_alpha_matching.py + G8_combined_pvalue.py,"Ld/mnu=1.0000 | alpha match 1.2% | p=2.7e-5","commit 28ea525"
+G8b_SIDM_constraint,DONE,G8b_sidm_forces_coincidence.py,"alpha_SIDM != alpha_d (ratio 9.62) | SIDM does NOT force coincidence",""
+G8c_mechanism,DONE,G8c_mechanism_scan.py,"y = g_d*sin(theta) at 97.5% | Y = (g_d/2i)(e^{2itheta}-1) | sin(theta)=1/3",""
+G8d_why_MAP,DONE,G8d_why_MAP_special.py,"alpha_d ~ const (7% variation) | MAP at percentile 0.03% | lambda=33.28",""
+G8e_A4_derivation,DONE,G8e_A4_derivation.py,"tan(theta)=g_p/g_s=1/3 DERIVED | sin2theta=1/10 vs 1/9 (VEV correction resolves) | normalization OPEN (needs lattice SU(2)_d)","565 lines | 9 parts + verdict"
+G8f_extended_scan,DONE,G8f_extended_scan_mp.py,"200/200 grains | 6848 SIDM hits | 51 dual-constraint (0.74%) | best: m_chi=119.6 GeV mismatch=0.0% | scan time=2182.8s","10 m_chi x 20 m_phi grid | m_chi [100,500] GeV | m_phi [2,200] MeV | 12 workers | checkpoint: G8f_hits_checkpoint.csv + G8f_grains_done.txt"
+G8f_Part1_results,DONE,,"alpha_d: 0.0326(50GeV)->0.0303(500GeV) 7% | y=g_d/3: 0.213->0.206 | Ld/mnu=1.0000 ALL masses",""
+G8f_distribution,DONE,,"hits: 100GeV=858 | 120=997 | 143=1059(peak) | 171=1013 | 205=886 | 245=703 | 292=539 | 350=403 | 418=257 | 500=133 | sharp decline above 143 GeV",""
+G8f_dual_constraint,DONE,,"51/6848 (0.74%) satisfy alpha+Lambda_d | best: m_chi=119.6 m_phi=13.9MeV mismatch=0.0% | MAP=3.9% | extended range BEATS MAP","lambda>30: 5 points all at m_chi=119-143 GeV"
+journal_update_G8e,DONE,,,"research_journal.md updated 30 Mar 2026"
+journal_update_G8f,DONE,,,"research_journal.md updated 30 Mar 2026"
+timing_table,TODO,,,"user requested wall-clock timing for all G8 scripts"

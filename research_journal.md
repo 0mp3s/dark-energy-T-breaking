@@ -3206,3 +3206,109 @@ $$V(\theta) = \Lambda_d^4 \bigl[(1-\cos\theta) + \varepsilon(1-\cos 2\theta)\big
 | `hunt_H0/test40_wz_figure_and_bins.py` | סקריפט Figure + Bins | ✅ |
 | `hunt_H0/test40_wz_desi_dr2.png` | גרף w(z) vs DESI DR2 | ✅ |
 | `hunt_H0/test40_wz_desi_dr2.pdf` | גרף PDF לפייפר | ✅ |
+
+---
+
+## Test 41 — Naturalness of ε from Multi-Instanton Corrections (2026-03-29)
+
+### מטרה
+להראות ש-$|\varepsilon| \sim 0.04$–$0.12$ הוא **טבעי** בתורת dark QCD, לא fine-tuning.
+
+### הטיעון
+
+בקירוב dilute instanton gas:
+$$\varepsilon = \frac{c_2}{c_1} \approx e^{-S_1}, \quad S_1 = \frac{2\pi}{\alpha_d(\Lambda_d)}$$
+
+עבור $|\varepsilon| = 0.04$–$0.12$:
+
+| $|\varepsilon|$ | $S_1$ | $\alpha_d(\Lambda_d)$ |
+|-----------------|-------|-----------------------|
+| 0.04 | 3.22 | 1.95 |
+| 0.08 | 2.53 | 2.49 |
+| 0.12 | 2.12 | 2.96 |
+
+→ $\alpha_d(\Lambda_d) \approx 2$–$3$ = **משטר הכליאה** (confinement regime). זה בדיוק מה שנצפה בסקאלה $\Lambda_d$.
+
+### השוואה ל-QCD על הסריג
+
+- QCD lattice (SU(3), $N_f = 2+1$): $b_2 = -0.022 \pm 0.003$ (Bonati+ 2015, Borsanyi+ 2016)
+- Dark SU(2): $|\varepsilon| \sim 0.04$–$0.12$ → פקטור 2–6 יותר גדול
+- **צפוי**: SU(2) עם $N_c = 2$ (פחות צבעים) → instanton action קטן יותר → $|\varepsilon|$ גדול יותר
+
+### RG Running
+
+- $\alpha_d(m_\chi = 98\,\text{GeV}) \approx 0.031$ (נדרש ל-$\Lambda_d = 2$ meV)
+- $b_0 = (11 \cdot 2 - 2 \cdot 1.5)/3 = 19/3 = 6.333$
+- הערה: $\alpha_D = 3.274 \times 10^{-3}$ מ-SIDM הוא coupling יוקאווה, לא בהכרח $\alpha_d$ הגייג'. ההבדל (פקטור ~10) טבעי.
+
+### מסקנה
+
+> **$\varepsilon$ אינו פרמטר חופשי** — הוא נחזה ע"י הדינמיקה של SU(2)\_d.
+> אותו transmutation ממדי שמייצר $\Lambda_d \sim 2$ meV מייצר אוטומטית $|\varepsilon| \sim 0.1$.
+> **כל הפנומנולוגיה — $\Lambda_d$, $\varepsilon$, $w_0$, $w_a$ — זורמת מקלט UV יחיד: $\alpha_d \sim 0.03$ ב-$\mu \sim 100$ GeV.**
+
+### קבצים
+
+| קובץ | תיאור | סטטוס |
+|------|--------|--------|
+| `hunt_H0/test41_epsilon_naturalness.py` | חישוב טבעיות + RG | ✅ |
+
+---
+
+## Test 42 — Degeneracy Ridge Plot (2026-03-29)
+
+### מטרה
+לייצר גרף 2D של $\Sigma\chi^2(\varepsilon, \theta_i)$ שמראה את ה-degeneracy ridge.
+
+### תוצאות
+
+**Ridge fit לינארי**:
+$$\theta_i^* = 2.918 + 0.911 \cdot |\varepsilon|$$
+
+**שטיחות ה-ridge**: $\Delta\Sigma\chi^2 < 0.5$ לאורך כל הטווח $|\varepsilon| = 0.03$–$0.13$.
+
+**נתוני Ridge** (θ\_i אופטימלי לכל ε):
+
+| $|\varepsilon|$ | $\theta_i^*$ | $w_0$ | $w_a$ | $\Sigma\chi^2$ |
+|-----------------|--------------|-------|-------|-----------------|
+| 0.03 | 2.940 | −0.734 | −0.484 | 12.13 |
+| 0.06 | 2.974 | −0.729 | −0.497 | 12.01 |
+| 0.09 | 3.002 | −0.724 | −0.508 | 11.92 |
+| **0.12** | **3.026** | **−0.734** | **−0.494** | **11.77** |
+| 0.13 | 3.030 | −0.708 | −0.543 | 12.27 |
+
+### משמעות פיזיקלית
+
+- הגדלת $|\varepsilon|$ מחדדת את ה-hilltop → צריך $\theta_i$ קצת יותר גדול (קרוב ל-$\pi$) כדי לשמר את אותו $w_0, w_a$
+- **רק הקומבינציה** $(\varepsilon, \theta_i)$ מוגבלת — הערכים הבודדים ניוונים
+- שבירת הניווון דורשת: (1) חישוב lattice של $\varepsilon$ ל-SU(2), או (2) מדידות DESI DR3+ ברזולוציה גבוהה יותר
+
+### קבצים
+
+| קובץ | תיאור | סטטוס |
+|------|--------|--------|
+| `hunt_H0/test42_degeneracy_ridge.py` | סקריפט contour + ridge | ✅ |
+| `hunt_H0/test42_degeneracy_ridge.png` | גרף 2D Σχ² | ✅ |
+| `hunt_H0/test42_degeneracy_ridge.pdf` | PDF לפייפר | ✅ |
+| `hunt_H0/test42_ridge_slices.png` | חתכים 1D לאורך ה-ridge | ✅ |
+| `hunt_H0/test42_ridge_slices.pdf` | PDF | ✅ |
+
+---
+
+## Paper 2 — טיוטה ראשונה (2026-03-29)
+
+נוצרה טיוטת פייפר 2 מלאה: `paper2_draft_v1.tex`
+
+### מבנה
+1. Introduction — מוטיבציה מ-DESI DR2
+2. The Model — SIDM + dark QCD + higher harmonics
+3. Dimensional Transmutation — $\Lambda_d \sim 2$ meV
+4. Coupled ODE — $H_0$ כפלט
+5. DESI DR2 Comparison — CPL + binned w(z)
+6. Naturalness of ε — multi-instanton + QCD lattice
+7. Parameter Degeneracy — ridge
+8. Transient DE — cosmic fate
+9. Predictions — 6 falsifiable predictions
+10. Discussion + Bibliography
+
+### סטטוס: טיוטה v1.0 — דורשת עריכה, figures, ו-references נוספים

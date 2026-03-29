@@ -39,14 +39,11 @@ Output
 
 import numpy as np
 from scipy.integrate import solve_ivp
-import sys
 import os
 import math
 
 # ── Import Boltzmann solver for Layer 7 (relic density) ──────────────────
-_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
-sys.path.insert(0, os.path.join(_ROOT, 'core'))
-from v27_boltzmann_relic import sigma_v_swave, solve_boltzmann, Y_to_omega_h2
+from boltzmann_relic import sigma_v_swave, solve_boltzmann, Y_to_omega_h2
 
 
 # ═══════════════════════════════════════════════════════════════════════════

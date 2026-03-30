@@ -4206,3 +4206,119 @@ Portal coupling: $\mathcal{L}_{\text{portal}} = -\lambda_p |H|^2 |\Phi|^2 = -\la
 
 **המסדרון הזהב:** θᵢ ∈ [2.98, 3.08], f ∈ [0.18, 0.23] M_Pl
 — פרמטרים סבירים, לא fine-tuned, ΛCDM background שמור.
+
+---
+
+## תכנית עבודה — 30 Mar 2026 (02:20)
+
+### מצב נוכחי
+| משימה | סטטוס |
+|---|---|
+| MCMC (stats_mcmc/run_mcmc.py) | 🔄 RUN — ×12 workers, ETA ~03:50 |
+| C2b | ✅ DONE |
+| C1: Sommerfeld Boltzmann | ⬜ NEXT |
+
+---
+
+### C1 — תכנית טכנית: Sommerfeld-Enhanced Boltzmann
+
+**הבעיה:** Test 21 חישב Ωh² עם ⟨σv⟩ קבוע (ללא S(v)) → קיבל Ωh²=6.2×10⁷ — שגוי.  
+הסיבה: הסקטור האפל עושה **freeze-out תרמי פנימי** (χχ→φφ), לא FIMP.  
+ה-⟨σv⟩ בזמן freeze-out **תלוי בטמפרטורה** עקב Sommerfeld enhancement S(v,T).
+
+**שלושה שלבים:**
+
+#### שלב 1: S_p(v) — Sommerfeld factor ל-p-wave Majorana
+- χ הוא Majorana → אנטי-קומוטציה → **p-wave dominant** (לא s-wave)
+- σ₀v³ = πα_d²/(4m_χ²) × v² (p-wave)
+- S_p(v): פתרון נומרי של משוואת שרדינגר עם פוטנציאל Yukawa:
+  $$-\psi'' = \left[k^2 + \frac{2\mu\alpha_d e^{-m_\phi r}}{r}\right]\psi$$
+  תנאי שפה: ψ(r→∞)∝e^{ikr}, S = |ψ'(0)/k|² × (v²/v_phys²)
+
+#### שלב 2: ⟨σv⟩(T) — ממוצע תרמי
+$$\langle\sigma v\rangle(T_D) = \frac{x_D^{3/2}}{2\sqrt{\pi}} \int_0^\infty (\sigma_0 v^3) \cdot S_p(v) \cdot e^{-x_D v^2/4} \, dv$$
+כאן $x_D = m_\chi/T_D$ — טמפרטורת הסקטור האפל.
+
+#### שלב 3: Boltzmann ODE
+$$\frac{dY}{dx_D} = -\frac{s_D \langle\sigma v\rangle(x_D)}{H(x_D) \, x_D} \left(Y^2 - Y_{\rm eq}^2\right)$$
+- $s_D = \frac{2\pi^2}{45} g^*_D T_D^3$
+- $H(x_D)$ = Hubble rate ב-SM (שולט): $H = \sqrt{\frac{\pi^2 g^*}{90}} \frac{T_{\rm SM}^2}{M_{\rm Pl}}$
+- $T_D/T_{\rm SM} = \xi \approx (T_D^{\rm decouple}/T_{\rm SM}^{\rm decouple})$ — כבר חושב בTest 21
+
+**קלט:** m_χ=98.19 GeV, m_φ=9.66 MeV, α_d=3.274×10⁻³, ξ מ-κ=5.3×10⁻⁴  
+**פלט:** Ωh² — האם מגיע ל-0.120?
+
+**ציפייה:** Sommerfeld מגדיל ⟨σv⟩ → χ ממשיך להתאיין יותר → freeze-out מאוחר יותר → Ωh² **נמוך** ממה שTest 21 קיבל. השאלה: כמה נמוך בדיוק — אולי בדיוק 0.120?
+
+**סקריפט:** `hunt_H0/C1_sommerfeld_boltzmann.py`
+
+---
+
+### אחרי MCMC (~03:50)
+1. קרא תוצאות: MAP של (m_χ, m_φ, α_d) + posterior width
+2. השווה MAP ל-benchmark הנוכחי שלנו (98.19 GeV, 9.66 MeV, 3.274×10⁻³)
+3. אם MAP שונה → עדכן פרמטרים ורץ C1 מחדש עם הערכים החדשים
+4. תעד תוצאות + push
+
+### סדר עדיפויות כולל
+| # | משימה | חשיבות |
+|---|---|---|
+| 1 | C1: Sommerfeld Boltzmann | ⚠️ MEDIUM — סגירה עצמית של Ωh² |
+| 2 | MCMC תוצאות + validation | ⚠️ MEDIUM — MAP עם uncertainties |
+| 3 | G8 open — α_d structural question | 🔴 HIGH — שאלה תיאורטית פתוחה |
+| 4 | preprint_draft — עדכון לאחר C1+MCMC | 📝 עבודת כתיבה |
+
+---
+
+## C1 תוצאות — 30 Mar 2026 (04:30)
+
+### S_p(v) — Sommerfeld p-wave (Coulomb analytic, תקף כי γ=m_φ/k≪1)
+| v/c | ε=α/v | S_p |
+|---|---|---|
+| 0.3 | 0.011 | 1.035 |
+| 0.1 | 0.033 | 1.108 |
+| 0.03 | 0.109 | 1.398 |
+| 0.01 | 0.327 | 2.61 |
+| 0.003 | 1.09 | 15.0 |
+| 0.001 | 3.27 | 241 |
+
+### ⟨σv⟩ עם Sommerfeld (S_eff ≈ 2 ליד freeze-out)
+| x_D | T_D [GeV] | ⟨σv⟩ [cm³/s] | S_eff |
+|---|---|---|---|
+| 5 | 19.6 | 2.47×10⁻²⁶ | 2.02 |
+| 20 | 4.91 | 6.24×10⁻²⁷ | 2.03 |
+| 50 | 1.96 | 2.52×10⁻²⁷ | 2.05 |
+
+### הממצא הקריטי: χ ≠ dark thermal relic
+
+**בעיה יסודית:**
+ξ = T_D/T_SM ≈ 4.74×10⁻³ (מ-κ=5.3×10⁻⁴, Test 21)
+
+→ T_D,max ≈ ξ × T_SM,max ≈ 4.74×10⁻³ × 40 GeV ≈ **0.19 GeV = 190 MeV**
+
+אבל: freeze-out תרמי קלאסי דורש T_D,fo ≈ m_χ/25 ≈ **4 GeV >> 190 MeV**!
+
+**מסקנה:** χ לא הגיע לשיווי-משקל כימי ב-T_D ~ m_χ → **לא רליק תרמי קלאסי**.
+
+### תוצאות Boltzmann ODE לפרמטרים שלנו
+| ξ | x_D,fo | Ωh² |
+|---|---|---|
+| 0.1 | 17.7 | 0.043 |
+| 0.05 | 16.8 | 0.018 |
+| 0.01 | 13.6 | 0.0023 |
+| 4.74×10⁻³ | 12.2 | **0.0009** |
+| 1×10⁻³ | 9.6 | 0.0001 |
+
+**דרוש:** Ωh² = 0.120 → צריך ξ ≈ 0.2–0.5 (גדול ×40×100 מהערך של κ!)
+
+### מה זה אומר לגוף המחקר?
+**פרשנות i:** Ωh² = 0.120 הוא **INPUT פנומנולוגי** (לא נגזר מ-α_d,m_χ). על המודל לספק מנגנון ייצור נפרד (אסימטרי? ממשי? decay?). ה-SIDM constraints מכוונות את (α_d, m_φ), וה-Ωh² מסופק ממנגנון עצמאי.
+
+**פרשנות ii:** יש רזוננס Sommerfeld (λ = m_φ/(m_χ α_d) ~ 1) — אבל לפרמטרים שלנו λ=0.03 << 1 (לא ליד רזוננס).
+
+**לפעול:** בפרפרינט — להצהיר שה-Ωh² שלנו הוא constraint חיצוני מ-Planck, לא תחזית של המודל. הסקטור האפל נוצר דרך channel שעדיין לא מפורט במלואו (לדוגמה, asymmetric DM או decay של חלקיק כבד).
+
+### סטטוס C1
+✅ **DONE** — הבאג (Test 21: Ωh²=6.2×10⁷) הובן: FIMP שגוי + חסר Sommerfeld + חסר dark sector ODE. Dark freeze-out נותן Ωh²=0.0009 לפרמטרים הנוכחיים. **Ωh²=0.120 הוא constraint חיצוני**.
+
+סקריפט: `hunt_H0/C1_sommerfeld_boltzmann.py`
